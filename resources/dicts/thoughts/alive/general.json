@@ -1497,12 +1497,23 @@
             "Is staying distant in a conversation",
             "Is hiding instead of talking at a clan gathering",
             "Just wants a solo patrol",
-            "Doesn't understand why {PRONOUN/m_c/poss} mentor asks them to speak up",
             "Isn't happy with r_c's enthusiasm",
             "Bickering to themself about other cats"
         ],
         "main_trait_constraint":[
             "aloof"
+        ]
+    },
+    {
+        "id": "aloof_app",
+        "thoughts": [
+            "Doesn't understand why {PRONOUN/m_c/poss} mentor asks them to speak up"
+        ],
+        "main_trait_constraint":[
+            "aloof"
+        ],
+        "main_status_constraint": [
+            "apprentice"
         ]
     },
     {
