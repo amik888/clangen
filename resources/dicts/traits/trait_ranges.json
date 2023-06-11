@@ -7,10 +7,10 @@
             "stability": [0, 8]
         },
         "lonesome": {
-            "lawfulness": [0, 8],
-            "sociability": [0, 8],
-            "aggression": [0, 8],
-            "stability": [8, 16]
+            "lawfulness": [0, 16],
+            "sociability": [0, 6],
+            "aggression": [2, 8],
+            "stability": [0, 8]
         },
         "fierce": {
             "lawfulness": [0, 8],
@@ -233,6 +233,24 @@
             "sociability": [0, 16],
             "aggression": [6, 10],
             "stability": [10, 16]
+        },
+        "altruistic": {
+            "lawfulness": [8, 16],
+            "sociability": [4, 12],
+            "aggression": [0, 4],
+            "stability": [8, 16]
+        },
+        "empathetic": {
+            "lawfulness": [4, 12],
+            "sociability": [4, 16],
+            "aggression": [0, 6],
+            "stability": [8, 16]
+        },
+        "patient": {
+            "lawfulness": [4, 12],
+            "sociability": [0, 12],
+            "aggression": [0, 6],
+            "stability": [5, 10]
         }
     },
     "kit_traits": {
@@ -244,7 +262,7 @@
         },
         "lonesome": {
             "lawfulness": [0, 8],
-            "sociability": [0, 8],
+            "sociability": [0, 6],
             "aggression": [0, 8],
             "stability": [8, 16]
         },
