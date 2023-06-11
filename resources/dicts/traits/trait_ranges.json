@@ -257,6 +257,18 @@
             "sociability": [0, 4],
             "aggression": [0, 16],
             "stability": [0, 6]
+        },
+        "stubborn": {
+            "lawfulness": [0, 6],
+            "sociability": [0, 10],
+            "aggression": [0, 12],
+            "stability": [0, 6]
+        },
+        "comedic": {
+            "lawfulness": [0, 8],
+            "sociability": [8, 16],
+            "aggression": [0, 12],
+            "stability": [0, 6]
         }
     },
     "kit_traits": {

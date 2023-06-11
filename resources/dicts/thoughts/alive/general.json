@@ -1506,6 +1506,76 @@
         ]
     },
     {
+        "id": "comedic_gen",
+        "thoughts": [
+            "Is being a clown",
+            "Laughs off the pain",
+            "Tells a bad joke for once in {PRONOUN/m_c/subject} life",
+            "Attracts a huge audience with {PRONOUN/m_c/subject} jokes",
+            "Is embarrassed because r_c laughed at something {PRONOUN/m_c/subject} did, but it wasn't a joke",
+            "Visits the medicine den... just to tell a joke",
+            "Is finding dark humor very funny",
+            "Is distracting patrolling cats with their humor"
+        ],
+        "main_trait_constraint":[
+            "comedic"
+        ]
+    },
+    {
+        "id": "comedic_proud",
+        "thoughts": [
+            "Is proud of making r_c laugh"
+        ],
+        "main_trait_constraint":[
+            "comedic"
+        ],
+        "random_trait_constraint":[
+            "cold", 
+            "grumpy"
+        ]
+    },
+    {
+        "id": "comedic_annoyed",
+        "thoughts": [
+            "Is annoyed r_c has a different sense of humor",
+            "Wonders why r_c never laughs at their jokes",
+            "Is annoyed r_c told a funnier joke than them"
+        ],
+        "main_trait_constraint":[
+            "comedic"
+        ]
+    },
+    {
+        "id": "stubborn_gen",
+        "thoughts": [
+            "Is refusing to change their mind",
+            "Thinks {PRONOUN/m_c/subject} are right",
+            "Is telling r_c why {PRONOUN/r_c/subject}{VERB/r_c/'re/'s} wrong",
+            "Won't give up after r_c tells them to quit",
+            "Is determined to sneak out of camp",
+            "Keeps going when everybody believes {PRONOUN/m_c/subject} gave up",
+            "Is staring at a wall trying to come up with ideas",
+            "Ends up on a solo patrol when everybody else gives up hunting",
+            "Finds themselves over the border after chasing a rabbit too far"
+        ],
+        "main_trait_constraint":[
+            "stubborn"
+        ]
+    },
+    {
+        "id": "stubborn_med_cat",
+        "thoughts": [
+            "Is determined to find an herb that is out of season"
+        ],
+        "main_trait_constraint" : [
+            "stubborn"
+        ],
+        "main_status_constraint": [
+            "medicine cat",
+            "medicine cat apprentice"
+        ]
+    },
+    {
         "id": "med_cat_alive_kit",
         "thoughts": [
             "Is teaching kits about what plants to stay away from",
