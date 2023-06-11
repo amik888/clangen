@@ -1490,6 +1490,36 @@
         ]
     },
     {
+        "id": "aloof_gen",
+        "thoughts": [
+            "Wishes r_c would just stop talking",
+            "Is annoyed when a cat suggests they give their thoughts on the situation",
+            "Is staying distant in a conversation",
+            "Is hiding instead of talking at a clan gathering",
+            "Just wants a solo patrol",
+            "Doesn't understand why {PRONOUN/m_c/poss} mentor asks them to speak up",
+            "Isn't happy with r_c's enthusiasm",
+            "Bickering to themself about other cats"
+        ],
+        "main_trait_constraint":[
+            "aloof"
+        ]
+    },
+    {
+        "id": "med_cat_alive_kit",
+        "thoughts": [
+            "Is teaching kits about what plants to stay away from",
+            "Chased kits out of {PRONOUN/m_c/poss} den"
+        ],
+        "main_status_constraint": [
+            "medicine cat",
+            "medicine cat apprentice"
+        ],  
+        "random_status_constraint": [
+            "kitten"
+        ]
+    },
+    {
         "id": "paralyzed_gen_to_alive_gen",
         "thoughts": [
             "Goes for a swim",
