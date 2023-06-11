@@ -251,6 +251,12 @@
             "sociability": [0, 12],
             "aggression": [0, 6],
             "stability": [5, 10]
+        },
+        "aloof": {
+            "lawfulness": [0, 8],
+            "sociability": [0, 4],
+            "aggression": [0, 16],
+            "stability": [0, 6]
         }
     },
     "kit_traits": {
