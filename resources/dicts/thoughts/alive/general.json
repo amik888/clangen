@@ -1245,11 +1245,32 @@
         ],
         "main_status_constraint": [
             "apprentice",
+            "nervous"
+    },
+    {
+        "id": "insecure_mediator_medicine_apprentice",
+        "thoughts": [
+            "Wonders if the warrior life would have better suited {PRONOUN/m_c/object}"
+        ],
+        "main_status_constraint": [
             "mediator apprentice",
             "medicine cat apprentice"
         ],
         "main_trait_constraint": [
-            "nervous"
+            "insecure"
+        ]
+    },
+    {
+        "id": "insecure_to_confident",
+        "thoughts": [
+            "Wonders if r_c ever doubts themself",
+            "Feels outshone by r_c"
+        ],
+        "main_trait_constraint": [
+            "insecure"
+        ],
+        "random_trait_constraint": [
+            "confident"
         ]
     },
     {
@@ -1454,6 +1475,212 @@
         ]
     },
     {
+        "id": "troublesome_gen",
+        "thoughts": [
+            "Is causing mischief",
+            "Is planning {PRONOUN/m_c/poss} next prank",
+            "Is feeling proud about {PRONOUN/m_c/poss} latest prank"
+        ],
+        "main_trait_constraint":[
+            "troublesome"
+        ]
+    },
+    {
+        "id": "lonesome_gen",
+        "thoughts": [
+            "Is feeling lonely",
+            "Feels lonesome",
+            "Watches other cats in the clan talking to each other",
+            "Feels like friends are just a burden",
+            "Doesn't need anyone's help"
+        ],
+        "main_trait_constraint":[
+            "lonesome"
+        ]
+    },
+    {
+        "id": "fierce_gen",
+        "thoughts": [
+            "Is prowling for prey",
+            "Isn't afraid to patrol alone",
+            "Challenges r_c to a friendly, but competitive, game"
+        ],
+        "main_trait_constraint":[
+            "fierce"
+        ]
+    },
+    {
+        "id": "bloodthirsty_apprentices",
+        "thoughts": [
+            "Starts a fight with another apprentice"
+        ],
+        "main_status_constraint": [
+            "apprentice",
+            "mediator apprentice",
+            "medicine cat apprentice"
+        ],
+        "main_trait_constraint": [
+            "bloodthirsty"
+        ]
+    },
+    {
+        "id": "cold_gen",
+        "thoughts": [
+            "Is prowling for prey",
+            "Isn't afraid to patrol alone",
+            "Challenges r_c to a friendly, but competitive, game"
+        ],
+        "main_trait_constraint":[
+            "cold"
+        ]
+    },
+    {
+        "id": "cold_apprentices",
+        "thoughts": [
+            "Is hoping {PRONOUN/m_c/poss} name will end in -claw"
+        ],
+        "main_status_constraint": [
+            "apprentice",
+            "mediator apprentice"
+        ],
+        "main_trait_constraint": [
+            "cold"
+        ]
+    },
+    {
+        "id": "childish_gen",
+        "thoughts": [
+            "Is whining about how bored they are",
+            "Is acting immature"
+        ],
+        "main_trait_constraint":[
+            "childish"
+        ]
+    },
+    {
+        "id": "childish_apprentice_to_apprentice",
+        "thoughts": [
+            "Managed to convince r_c to play mossball instead of finishing their duties"
+        ],
+        "main_status_constraint": [
+            "apprentice",
+            "mediator apprentice",
+            "medicine cat apprentice"
+        ],
+        "random_status_constraint": [
+            "apprentice",
+            "mediator apprentice",
+            "medicine cat apprentice"
+        ],
+        "main_trait_constraint": [
+            "childish"
+        ]
+    },
+    {
+        "id": "bold_gen",
+        "thoughts": [
+            "Is boasting about their latest fresh-kill"
+        ],
+        "main_trait_constraint":[
+            "bold"
+        ]
+    },
+    {
+        "id": "daring_gen",
+        "thoughts": [
+            "Is competing with r_c",
+            "Is thinking about how they would scare away a dog"
+        ],
+        "main_trait_constraint":[
+            "daring"
+        ]
+    },
+    {
+        "id": "nervous_gen",
+        "thoughts": [
+            "Is worried about the next patrol"
+        ],
+        "main_trait_constraint":[
+            "nervous"
+        ]
+    },
+    {
+        "id": "nervous_apprentices",
+        "thoughts": [
+            "Is hoping to not train today...",
+            "Wishes {PRONOUN/m_c/subject} {VERB/m_c/were/was} back in the nursery",
+            "Has agreed to {PRONOUN/m_c/poss} mentor's orders recently, despite {PRONOUN/m_c/poss} own doubts",
+            "Managed to conquer a difficult task, despite feeling nervous",
+            "Was startled by a squirrel while training"
+        ],
+        "main_status_constraint": [
+            "apprentice",
+            "mediator apprentice",
+            "medicine cat apprentice"
+        ],
+        "main_trait_constraint": [
+            "nervous"
+        ]
+    },
+    {
+        "id": "righteous_gen",
+        "thoughts": [
+            "Is confident in their morals"
+        ],
+        "main_trait_constraint":[
+            "righteous"
+        ]
+    },
+    {
+        "id": "insecure_gen",
+        "thoughts": [
+            "Isn't confident in their abilities",
+            "Wonders how other cats perceive them",
+            "Is hoping everyone likes them"
+        ],
+        "main_trait_constraint":[
+            "insecure"
+        ]
+    },
+    {
+        "id": "strict_gen",
+        "thoughts": [
+            "Refuses to break or bend the rules"
+        ],
+        "main_trait_constraint":[
+            "strict"
+        ]
+    },
+    {
+        "id": "compassionate_gen",
+        "thoughts": [
+            "Listens to r_c"
+        ],
+        "main_trait_constraint":[
+            "compassionate"
+        ]
+    },
+    {
+        "id": "thoughtful_gen",
+        "thoughts": [
+            "Is thinking of a gift for r_c",
+            "Is wondering what r_c is doing",
+            "Is lost in thought"
+        ],
+        "main_trait_constraint":[
+            "thoughtful"
+        ]
+    },
+    {
+        "id": "ambitious_gen",
+        "thoughts": [
+            "Is leading r_c through a task"
+        ],
+        "main_trait_constraint":[
+            "ambitious"
+        ]
+    },
+    {
         "id": "ambitious_apprentices",
         "thoughts": [
             "Has been asking {PRONOUN/m_c/poss} mentor for more training",
@@ -1492,16 +1719,27 @@
     {
         "id": "aloof_gen",
         "thoughts": [
-            "Wishes r_c would just stop talking",
             "Is annoyed when a cat suggests they give their thoughts on the situation",
             "Is staying distant in a conversation",
             "Is hiding instead of talking at a clan gathering",
             "Just wants a solo patrol",
-            "Isn't happy with r_c's enthusiasm",
             "Bickering to themself about other cats"
         ],
         "main_trait_constraint":[
             "aloof"
+        ]
+    },
+    {
+        "id": "aloof_annoyed",
+        "thoughts": [
+            "Wishes r_c would just stop talking",
+            "Isn't happy with r_c's enthusiasm"
+        ],
+        "main_trait_constraint":[
+            "aloof"
+        ],
+        "random_living_status": [
+            "living"
         ]
     },
     {
