@@ -269,6 +269,18 @@
             "sociability": [8, 16],
             "aggression": [0, 12],
             "stability": [0, 6]
+        },
+        "impulsive": {
+            "lawfulness": [0, 8],
+            "sociability": [0, 8],
+            "aggression": [8, 16],
+            "stability": [0, 8]
+        },
+        "mysterious": {
+            "lawfulness": [0, 8],
+            "sociability": [0, 8],
+            "aggression": [0, 8],
+            "stability" : [8, 16]
         }
     },
     "kit_traits": {
