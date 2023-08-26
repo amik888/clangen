@@ -1197,7 +1197,7 @@ class ProfileScreen(Screens):
                         continue
                     
                     ment_obj = Cat.fetch_cat(_mentor)
-                    #Continue of the mentor is invalid too.
+                    #Continue if the mentor is invalid too.
                     if not isinstance(ment_obj, Cat):
                         continue
                     
@@ -1217,26 +1217,35 @@ class ProfileScreen(Screens):
             
             
             skill_influence = []
-            if "skill" in mentor_influence and isinstance(mentor_influence["skill"], dict):
-                for _mentor in mentor_influence["skill"]:
-                    #If the strings are not set (empty list), continue. 
-                    if not mentor_influence["skill"][_mentor].get("strings"):
-                        continue
-                    
-                    ment_obj = Cat.fetch_cat(_mentor)
-                    #Continue of the mentor is invalid too.
-                    if not isinstance(ment_obj, Cat):
-                        continue
-                    
-                    if len(mentor_influence["skill"][_mentor].get("strings")) > 1:
-                        string_snippet = ", ".join(mentor_influence["skill"][_mentor].get("strings")[:-1]) + \
-                            " and " + mentor_influence["skill"][_mentor].get("strings")[-1]
-                    else:
-                        string_snippet = mentor_influence["skill"][_mentor].get("strings")[0]
+            mentor_skill_influence = mentor_influence["skill"]
+            if "skill" in mentor_influence and mentor_skill_influence != None:
+                if isinstance(mentor_skill_influence, str):
+                    ment_obj = valid_formor_mentors[0]
+                    #Continue of the mentor is valid
+                    if isinstance(ment_obj, Cat):
+                        skill_influence.append(str(ment_obj.name) +  \
+                                        " helped {PRONOUN/m_c/object} become a " + mentor_skill_influence + ".")
+                else:
+                    for _mentor in mentor_skill_influence:
+                        #If the strings are not set (empty list), continue. 
+                        if not mentor_influence["skill"][_mentor].get("strings"):
+                        #if mentor_skill_influence == {}:
+                            continue
                         
-                    
-                    skill_influence.append(str(ment_obj.name) +  \
-                                        " helped {PRONOUN/m_c/object} become better at " + string_snippet + ". ")
+                        ment_obj = Cat.fetch_cat(_mentor)
+                        #Continue of the mentor is invalid too.
+                        if not isinstance(ment_obj, Cat):
+                            continue
+                        
+                        if len(mentor_influence["skill"][_mentor].get("strings")) > 1:
+                            string_snippet = ", ".join(mentor_influence["skill"][_mentor].get("strings")[:-1]) + \
+                                " and " + mentor_influence["skill"][_mentor].get("strings")[-1]
+                        else:
+                            string_snippet = mentor_influence["skill"][_mentor].get("strings")[0]
+                            
+                        
+                        skill_influence.append(str(ment_obj.name) +  \
+                                            " helped {PRONOUN/m_c/object} become better at " + string_snippet + ". ")
                     
                     
 
