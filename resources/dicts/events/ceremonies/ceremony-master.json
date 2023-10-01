@@ -122,7 +122,11 @@
       "insecure",
       "nervous",
       "thoughtful",
-      "gloomy"
+      "gloomy",
+      "careful",
+      "angsty",
+      "hesitant",
+      "cautious"
     ],
     "(mentor) sees how nervous m_c is and whispers a quiet encouragement to {PRONOUN/m_c/object} as they touch noses, promising to be a good mentor to {PRONOUN/m_c/object}."
   ],
@@ -142,7 +146,9 @@
       "insecure",
       "compassionate",
       "thoughtful",
-      "gloomy"
+      "gloomy",
+      "angsty",
+      "aloof"
     ],
     "m_c touches noses with (mentor), wondering whether this is truly the right path for {PRONOUN/m_c/object}."
   ],
@@ -159,7 +165,9 @@
       "sneaky",
       "strict",
       "wise",
-      "cunning"
+      "cunning",
+      "aloof",
+      "lonesome"
     ],
     "m_c remains calm as {PRONOUN/m_c/subject} {VERB/m_c/touch/touches} noses with (mentor), but {PRONOUN/m_c/poss} twitching tail gives away how excited {PRONOUN/m_c/subject} truly {VERB/m_c/are/is}."
   ],
@@ -181,7 +189,11 @@
       "arrogant",
       "competitive",
       "sincere",
-      "flamboyant"
+      "flamboyant",
+      "strict",
+      "ambitious",
+      "brave",
+      "talkative"
     ],
     "m_c can't seem to sit still as {PRONOUN/m_c/subject} {VERB/m_c/bounce/bounces} up to touch noses with (mentor), swearing {PRONOUN/m_c/subject}'ll be the best warrior the Clan has ever seen."
   ],
@@ -201,7 +213,8 @@
       "strict",
       "vengeful",
       "wise",
-      "cunning"
+      "cunning",
+      "prideful"
     ],
     "m_c sits up straighter as {PRONOUN/m_c/subject}{VERB/m_c/'re/'s} called forward to be made an apprentice. While {PRONOUN/m_c/subject} {VERB/m_c/try/tries} to look calm and collected, {PRONOUN/m_c/subject} still {VERB/m_c/tremble/trembles} a bit as {PRONOUN/m_c/subject} {VERB/m_c/touch/touches} noses with (mentor)."
   ],
@@ -222,7 +235,9 @@
       "grumpy",
       "oblivious",
       "flamboyant",
-      "rebellious"
+      "rebellious",
+      "childish",
+      "impatient"
     ],
     "Almost immediately after m_c touches noses with (mentor), {PRONOUN/m_c/subject} {VERB/m_c/start/starts} asking about when they're going to go out and explore the territory."
   ],
@@ -245,7 +260,8 @@
       "arrogant",
       "competitive",
       "flamboyant",
-      "rebellious"
+      "rebellious",
+      "impatient"
     ],
     "m_c fidgets impatiently beside (mentor) as {PRONOUN/m_c/subject} {VERB/m_c/wait/waits} for the meeting to end. {PRONOUN/m_c/subject/CAP}{VERB/m_c/'re/'s} finally an apprentice! {PRONOUN/m_c/subject/CAP} {VERB/m_c/want/wants} to hurry up, get out there, and go, go, go!"
   ],

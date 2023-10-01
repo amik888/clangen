@@ -81,6 +81,8 @@ class NewCatEvents:
                                                                         enemy_clan,
                                                                         other_clan, alive_kits)
         if not final_events:
+            print(cat.status)
+            print(cat.age)
             print('ERROR: no new cat moon events available')
             return
         else:

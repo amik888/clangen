@@ -229,6 +229,129 @@
         ]
     },
     {
+        "id": "righteous_warrior_apprentice",
+        "thoughts": [
+            "Watches the sunrise with wonder",
+            "Can't stand seeing any cat bullied or mistreated",
+            "Won't give up on training with their mentor, even though it's tough",
+            "Listens to the clan leader with full attention",
+            "Is closely studying the Warrior Code",
+            "Hopes StarClan is proud of the cat they're becoming"
+        ],
+        "main_trait_constraint": [
+            "righteous"
+        ]
+    },
+    {
+        "id": "comedic_warrior_apprentice",
+        "thoughts": [
+            "Wishes the birds would start chirping a little later so they can sleep in",
+            "Tried to catch their tail today, but it's still too fast",
+            "Doesn't understand why the elders take things so seriously",
+            "Complains that gravity has a grudge against them after falling out of a tree",
+            "Tries to mimic the leader's dignified walk and fails",
+            "Reminds another cat to lighten up"
+        ],
+        "main_trait_constraint": [
+            "comedic"
+        ]
+    },
+    {
+        "id": "impatient_warrior_apprentice",
+        "thoughts": [
+            "Wonders why training takes so long",
+            "Wishes they were a warrior already",
+            "Is tired of waiting in line for the fresh-kill pile",
+            "Wishes they could skip all the ceremonies",
+            "Is bored sitting through clan meetings",
+            "Is dreaming of the day they'll be a warrior"
+        ],
+        "main_trait_constraint": [
+            "impatient"
+        ]
+    },
+    {
+        "id": "angsty_warrior_apprentice",
+        "thoughts": [
+            "Doesn't think anyone understands them",
+            "Feels like older cats are treating them like a kit",
+            "Wants to figure out their training on their own",
+            "Feels controlled by the Warrior Code",
+            "Doesn't really care about the upcoming ceremonies",
+            "Wishes someone would listen to them",
+            "Isn't sure what their place in the clan is"
+        ],
+        "main_trait_constraint": [
+            "angsty"
+        ]
+    },
+    {
+        "id": "careful_warrior_apprentice",
+        "thoughts": [
+            "Considers what they've gotten done today",
+            "Knows every decision matters",
+            "Is observing other warriors and trying to learn from their wisdom",
+            "Double checks their nest for thorns",
+            "Listens to elder stories",
+            "Is being vigilant"
+        ],
+        "main_trait_constraint": [
+            "careful"
+        ]
+    },
+        {
+        "id": "wry_warrior_apprentice",
+        "thoughts": [
+            "Is tired of hearing the same things repeated at clan meetings",
+            "Is rolling their eyes",
+            "Is being sarcastic",
+            "Is skeptical of an elder's story"
+        ],
+        "main_trait_constraint": [
+            "wry"
+        ]
+    },
+    {
+        "id": "odd_warrior_apprentice",
+        "thoughts": [
+            "Counts the leaves on every fern they pass",
+            "Is naming bugs and calling them friends",
+            "Is organizing their feather collection",
+            "Is staring at the clouds",
+            "Tries to teach the other cats a game they invented",
+            "Wonders about the moon"
+        ],
+        "main_trait_constraint": [
+            "odd"
+        ]
+    },
+    {
+        "id": "impulsive_warrior_apprentice",
+        "thoughts": [
+            "Prefers to act first and think eventually",
+            "Is ready for a new adventure",
+            "Is being unpredictable",
+            "Behaves recklessly on patrols"
+        ],
+        "main_trait_constraint": [
+            "impulsive"
+        ]
+    },
+    {
+        "id": "stubborn_warrior_apprentice",
+        "thoughts": [
+            "Is doing things their own way",
+            "Won't change their mind",
+            "Is arguing just to prove a point",
+            "Climbed a tree and is refusing to come down until they're ready",
+            "Is staying true to themself",
+            "Is determined to do something"
+        ],
+        "main_trait_constraint": [
+            "stubborn"
+        ]
+    },
+    {
         "id": "insecure_warrior_apprentice",
         "thoughts": [
             "Is wondering if {PRONOUN/m_c/subject} {VERB/m_c/are/is} good enough to be a warrior...",
@@ -244,7 +367,16 @@
             "Is worrying about something",
             "Says sorry more often than {PRONOUN/m_c/subject} need to",
             "Is hiding after receiving a compliment",
-            "Is avoiding everyone today"
+            "Is avoiding everyone today",
+            "Is worried they won't live up to their mentor's expectations",
+            "Wonders if they'll ever be as good of a hunter as r_c",
+            "Hopes they don't mess up today's training",
+            "Worries about what r_c thinks of them",
+            "Is worried r_c will laugh at them",
+            "Wishes they had the courage to challenge r_c to a friendly spar",
+            "Stresses about the risk of getting lost on patrol",
+            "Wonders if they're good enough",
+            "Isn't sure they will be a very good warrior"
         ],
         "main_trait_constraint": [
             "insecure"
@@ -267,6 +399,155 @@
         ],
         "main_trait_constraint": [
             "fierce"
+        ]
+    },
+    {
+        "id": "troublesome_warrior_apprentice",
+        "thoughts": [
+            "Has fun breaking the rules",
+            "Has a knack for annoying {PRONOUN/m_c/poss} mentor",
+            "Was recently scolded by {PRONOUN/m_c/poss} mentor for {PRONOUN/m_c/poss} behaviour out on patrol",
+            "Stole moss from the elders' den",
+            "Is sneaking up behind other cats and scaring them",
+            "Is hissing at r_c",
+            "Is hoping someone will dare them to do a prank",
+            "Is hoping to convince r_c to sneak out with them later",
+            "Is teasing r_c",
+            "Is rolling {PRONOUN/m_c/poss} eyes at {PRONOUN/m_c/poss} mentor"
+        ],
+        "main_trait_constraint": [
+            "troublesome"
+        ]
+    },
+    {
+        "id": "cold_warrior_apprentice",
+        "thoughts": [
+            "Prefers {PRONOUN/m_c/poss} quiet solitude",
+            "Finds gatherings tedious",
+            "Is busy practicing alone",
+            "Isn't sure about r_c",
+            "Is grumbling about training",
+            "Doesn't want to share tongues with anyone",
+            "Is hoping to show off their strength in training",
+            "Wants to get out of a conversation",
+            "Is too busy training to gossip",
+            "Listens to a conversation but doesn't join in"
+        ],
+        "main_trait_constraint": [
+            "cold"
+        ]
+    },
+    {
+        "id": "lonesome_warrior_apprentice",
+        "thoughts": [
+            "Prefers {PRONOUN/m_c/poss} quiet solitude",
+            "Feels like they belong more outside the camp sometimes",
+            "Is busy practicing alone",
+            "Knows there is much to learn in silence",
+            "Is staying up late to find comfort in the moon and stars",
+            "Is puzzled by r_c",
+            "Is determined to prove their worth",
+            "Wants to get out of a conversation",
+            "Would rather be on patrol than at a gathering",
+            "Listens to a conversation but doesn't join in"
+        ],
+        "main_trait_constraint": [
+            "lonesome"
+        ]
+    },
+    {
+        "id": "playful_warrior_apprentice",
+        "thoughts": [
+            "Wonders if they could bend the rules just a little",
+            "Is playing 'guess the deputy's next word'",
+            "Is hoping to play fight with r_c later",
+            "Wishes they didn't have to train",
+            "Is grateful that their mentor is a good sport",
+            "Tries to turn their training session into a game",
+            "Is distracted",
+            "Is making funny faces at r_c",
+            "Is dying of boredom at a clan meeting"
+        ],
+        "main_trait_constraint": [
+            "playful"
+        ]
+    },
+    {
+        "id": "charismatic_warrior_apprentice",
+        "thoughts": [
+            "Wonders if they would make a good mentor one day",
+            "Shares what they learned in training with r_c",
+            "Convinces r_c to watch them practice a new move",
+            "Is giving their all today",
+            "Imagines fighting like the older warriors one day",
+            "Gives encouragement to r_c"
+        ],
+        "main_trait_constraint": [
+            "charismatic"
+        ]
+    },
+    {
+        "id": "bold_warrior_apprentice",
+        "thoughts": [
+            "Is speaking their mind",
+            "Is talking back to their mentor",
+            "Is arguing with r_c",
+            "Isn't afraid to patrol alone"
+        ],
+        "main_trait_constraint": [
+            "bold"
+        ]
+    },
+    {
+        "id": "daring_warrior_apprentice",
+        "thoughts": [
+            "Wants to explore every inch of territory",
+            "Is talking about how they would take down a badger",
+            "Is hoping to have a fun adventure today"
+        ],
+        "main_trait_constraint": [
+            "daring"
+        ]
+    },
+    {
+        "id": "nervous_warrior_apprentice",
+        "thoughts": [
+            "Is worried they will mess up training today",
+            "Is feeling a lot of pressure",
+            "Hopes they don't mess up today's training",
+            "Worries about whether they made a fool of themself yesterday",
+            "Is worried they said something wrong",
+            "Wishes they had the courage to challenge r_c to a friendly spar",
+            "Stresses about the risk of getting lost on patrol",
+            "Is stressing about being a warrior one day"
+        ],
+        "main_trait_constraint": [
+            "nervous"
+        ]
+    },
+    {
+        "id": "strict_warrior_apprentice",
+        "thoughts": [
+            "Is reciting the Warrior Code over and over",
+            "Gets annoyed when other cats don't take things seriously",
+            "Is committed to becoming the best warrior they can be",
+            "Is getting each of their apprentice duties done exactly right",
+            "Doesn't think r_c is very knowledgable in the Warrior Code",
+            "Wishes other cats would clean up better",
+            "Is annoyed when r_c is late to their sparring"
+        ],
+        "main_trait_constraint": [
+            "strict"
+        ]
+    },
+    {
+        "id": "compassionate_warrior_apprentice",
+        "thoughts": [
+            "Is listening attentively to their mentor",
+            "Wonders what kind of warrior they will be"
+        ],
+        "main_trait_constraint": [
+            "compassionate"
         ]
     },
     {
@@ -387,7 +668,17 @@
             "Isn't paying attention to the lesson... again",
             "Overslept and missed the dawn patrol",
             "Says {PRONOUN/m_c/subject} {VERB/m_c/do/does}n't want to do anything today",
-            "Is not allowed to leave camp without asking first"
+            "Is not allowed to leave camp without asking first",
+            "Wonders why rules are so important",
+            "Is making up a new game",
+            "Thinks the warrior code is just a bunch of boring words",
+            "Feels happy spending time with the clan",
+            "Got a little carried away play fighting with r_c",
+            "Is dying of boredom at a clan meeting",
+            "Is ignoring {PRONOUN/m_c/poss} mentor",
+            "Wishes training was more fun",
+            "Wonders if they'll make a new friend today",
+            "Is having trouble focusing on training"
         ],
         "main_trait_constraint": [
             "childish"

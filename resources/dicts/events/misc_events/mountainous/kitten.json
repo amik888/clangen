@@ -1,3 +1,21 @@
 [
-
+	{
+        "camp": "any",
+        "tags": [
+            "clan_kits",
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare",
+            "other_cat",
+            "other_cat_parent"
+        ],
+        "event_text": "While r_c is watching over m_c, {PRONOUN/r_c/subject} {VERB/r_c/see/sees} a shooting star across the night sky and interprets it to mean m_c will be a great warrior.",
+        "cat_trait": null,
+        "cat_skill": null,
+        "other_cat_trait": null,
+        "other_cat_skill": [
+            "STAR,1"
+        ]
+    }
 ]

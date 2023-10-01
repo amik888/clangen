@@ -246,6 +246,10 @@ class Personality():
         if possible_traits:
             self.trait = choice(possible_traits)
         else:
+            print(self.lawfulness)
+            print(self.sociability)
+            print(self.aggression)
+            print(self.stability)
             print("No possible traits! Using 'strange'")
             self.trait = "strange"
             

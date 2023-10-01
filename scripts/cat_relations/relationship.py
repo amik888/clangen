@@ -111,7 +111,7 @@ class Relationship():
                 ])
             ]
 
-        # check if the current interaction id is already used and us another if so
+        # check if the current interaction id is already used and use another if so
         chosen_interaction = choice(possible_interactions)
         while chosen_interaction.id in self.used_interaction_ids\
             and len(possible_interactions) > 2:
@@ -320,7 +320,10 @@ class Relationship():
 
         # further influence the partition based on the relationship
         list_to_choice += [True] * int(self.platonic_like/10)
+        list_to_choice += [True] * int(self.romantic_love/20)
         list_to_choice += [False] * int(self.dislike/10)
+        list_to_choice += [False] * int(self.jealousy/10)
+        
 
         return choice(list_to_choice)
 
@@ -364,7 +367,7 @@ class Relationship():
         for rel_type, weight in value_weights.items():
             types += [rel_type] * weight
 
-        # if a romantic relationship is not possible, remove this type, mut only if there are no mates
+        # if a romantic relationship is not possible, remove this type, but only if there are no mates
         # if there already mates (set up by the user for example), don't remove this type
         mate_from_to = self.cat_from.is_potential_mate(self.cat_to, for_love_interest=True)
         mate_to_from = self.cat_to.is_potential_mate(self.cat_from, for_love_interest=True)
