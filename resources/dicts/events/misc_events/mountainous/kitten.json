@@ -17,5 +17,24 @@
         "other_cat_skill": [
             "STAR,1"
         ]
+    },
+    {
+        "camp": "any",
+        "tags": [
+            "clan_kits",
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare",
+            "other_cat",
+            "other_cat_parent"
+        ],
+        "event_text": "r_c purrs next to m_c, telling {PRONOUN/m_c/object} stories of the ancestors that used to live on the mountain and how to find comfort in the stars.",
+        "cat_trait": null,
+        "cat_skill": null,
+        "other_cat_trait": null,
+        "other_cat_skill": [
+            "STAR,1"
+        ]
     }
 ]

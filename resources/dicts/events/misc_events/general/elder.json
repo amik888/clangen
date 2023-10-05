@@ -143,5 +143,75 @@
             "STORY,1",
             "LORE,2"
         ]
+    },
+    {
+        "camp": "Any",
+        "tags": [
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare",
+            "rc_to_mc",
+            "comfort",
+            "respect",
+            "clan_kits"
+        ],
+        "event_text": "m_c has given some kits a riddle to solve, {PRONOUN/m_c/subject} {VERB/m_c/leave/leaves} a trail of pawprints and hidden clues to a nearby landmark.",
+        "cat_skill": [
+            "CLEVER,2"
+        ]
+    },
+    {
+        "camp": "Any",
+        "tags": [
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "rc_to_mc",
+            "comfort",
+            "respect",
+            "clan_kits"
+        ],
+        "event_text": "m_c has challeged some bored kits to create the most comfortable nest with a variety of materials within a time limit.",
+        "cat_skill": [
+            "CLEVER,1",
+            "CAMP,2"
+        ]
+    },
+    {
+        "camp": "Any",
+        "tags": [
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare",
+            "rc_to_mc",
+            "respect",
+            "clan_kits"
+        ],
+        "event_text": "Some kits settle in as m_c tells how {PRONOUN/m_c/subject} survived a dangerous battle patrolling the border.",
+        "cat_skill": [
+            "FIGHTER,5",
+            "CAMP,2"
+        ]
+    },
+    {
+        "camp": "Any",
+        "tags": [
+            "Leaf-bare"
+        ],
+        "event_text": "m_c is feeling the chill of the season in their bones. {PRONOUN/m_c/subject} {VERB/m_c/spend/spends} extra time in the warmest spots of camp.",
+        "cat_skill": null
+    },
+    {
+        "camp": "Any",
+        "tags": [
+            "Leaf-bare",
+            "rc_to_mc",
+            "comfort",
+            "clan_kits"
+        ],
+        "event_text": "m_c assures a kit that Newleaf will be here soon enough.",
+        "cat_skill": null
     }
 ]

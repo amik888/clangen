@@ -299,7 +299,66 @@
             "careful"
         ]
     },
-        {
+    {
+        "id": "faithful_warrior_apprentice",
+        "thoughts": [
+            "Is trying to earn their mentor's approval",
+            "Feels like their training is sacred",
+            "Is taking the Warrior Code very seriously",
+            "Asks their mentor about the Warrior Code"
+        ],
+        "main_trait_constraint": [
+            "faithful"
+        ]
+    },
+    {
+        "id": "loving_warrior_apprentice",
+        "thoughts": [
+            "Is telling their mentor about a pretty flower they saw on patrol",
+            "Offers to help their mentor on patrol"
+        ],
+        "main_trait_constraint": [
+            "loving"
+        ]
+    },
+    {
+        "id": "loyal_warrior_apprentice",
+        "thoughts": [
+            "Is hoping to be a warrior that provides lots of food for the clan",
+            "Is following r_c around"
+        ],
+        "main_trait_constraint": [
+            "loyal"
+        ],
+        "random_status_constraint":[
+            "leader"
+        ]
+    },
+    {
+        "id": "apprentice_alive_elder",
+        "thoughts":[
+            "Is dreading having to clean the elders' den later",
+            "Is picking ticks off of r_c",
+            "Listens to a story from r_c",
+            "Is making sure the elders are comfortable",
+            "Is asking r_c how things have changed since {PRONOUN/m_c/subject} {VERB/m_c/were/was} a 'paw'",
+            "Appreciates r_c's words of wisdom",
+            "Doesn't mind taking care of the elders",
+            "Is cleaning out the elder's den today",
+            "Hopes r_c is in a better mood today",
+            "Asks r_c what it's like to be an elder",
+            "Is doing {PRONOUN/m_c/poss} best to keep r_c happy",
+            "Is bringing r_c a nice piece of prey",
+            "Is complaining about picking ticks out of the elders' pelts"
+        ],
+        "random_status_constraint":[
+            "leader"
+        ],
+        "random_age_constraint":[
+            "senior"
+        ]
+    },
+    {
         "id": "wry_warrior_apprentice",
         "thoughts": [
             "Is tired of hearing the same things repeated at clan meetings",
@@ -417,6 +476,31 @@
         ],
         "main_trait_constraint": [
             "troublesome"
+        ]
+    },
+    {
+        "id": "troublesome_apprentice_duo",
+        "thoughts": [
+            "Is breaking a rule with r_c",
+            "Is taking from the fresh-kill pile while r_c creates a distraction",
+            "Is eavesdropping with r_c on their mentors",
+            "Is hiding from {PRONOUN/m_c/poss} mentor with r_c",
+            "Spreading rumors with r_c"
+        ],
+        "main_trait_constraint": [
+            "troublesome",
+            "sneaky",
+            "cunning",
+            "daring"
+        ],
+        "random_trait_constraint":[
+           "troublesome",
+            "sneaky",
+            "cunning",
+            "daring" 
+        ],
+        "random_status_constraint":[
+            "apprentice"
         ]
     },
     {
@@ -548,6 +632,66 @@
         ],
         "main_trait_constraint": [
             "compassionate"
+        ]
+    },
+    {
+        "id": "competitive_warrior_apprentice",
+        "thoughts": [
+            "Hopes they're the best apprentice their mentor has had",
+            "Feels frustrated by how long it takes to become a warrior"
+        ],
+        "main_trait_constraint": [
+            "competitive"
+        ]
+    },
+    {
+        "id": "competitive_warrior_apprentice_to_apps",
+        "thoughts": [
+            "Is racing with r_c",
+            "Challenges r_c to catch more prey than m_c",
+            "Challenges r_c to mark more territory than m_c",
+            "Tells r_c that m_c's mentor is better",
+            "Brags to r_c about all the prey they caught without their mentor's help"
+        ],
+        "main_trait_constraint": [
+            "competitive"
+        ],
+        "random_status_constraint": [
+            "apprentice"
+        ]
+    },
+    {
+        "id": "adventurous_warrior_apprentice",
+        "thoughts": [
+            "Enjoys the thrill of hunting",
+            "Wonders what lies beyond the clan territory",
+            "Dreams of discovering a new kind of prey",
+            "Is listening to stories of adventure",
+            "Imagines what it will be like as a warrior",
+            "Imagines fighting in a great battle",
+            "Wants to uncover a secret place",
+            "Is climbing as high as they can for the thrill of it",
+            "Enjoys how everything looks from the tallest tree"
+        ],
+        "main_trait_constraint": [
+            "adventurous"
+        ]
+    },
+    {
+        "id": "calm_warrior_apprentice",
+        "thoughts": [
+            "Is quietly reflecting on the day with their mentor",
+            "Is observing the birds in flight",
+            "Is having a polite discussion with their mentor",
+            "Appreciates the serenity of camp",
+            "Is considering asking an elder for advice",
+            "Is reflecting on their latest training with their mentor",
+            "Wants to learn more about the clan history",
+            "Is learning how to listen to the wind with their mentor",
+            "Hopes to be a reliable warrior one day"
+        ],
+        "main_trait_constraint": [
+            "calm"
         ]
     },
     {
