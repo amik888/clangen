@@ -341,6 +341,30 @@
             "sociability": [6, 16],
             "aggression": [0, 6],
             "stability": [0, 8]
+        },
+        "clumsy": {
+            "lawfulness": [0, 6],
+            "sociability": [4, 10],
+            "aggression": [0, 6],
+            "stability": [5, 11]
+        },
+        "graceful": {
+            "lawfulness": [4, 10],
+            "sociability": [0, 6],
+            "aggression": [0, 8],
+            "stability": [8, 16]
+        },
+        "condescending": {
+            "lawfulness": [12, 16],
+            "sociability": [0, 5],
+            "aggression": [8, 16],
+            "stability": [0, 12]
+        },
+        "rude": {
+            "lawfulness": [4, 8],
+            "sociability": [0, 3],
+            "aggression": [10, 16],
+            "stability": [0, 8]
         }
     },
     "kit_traits": {
@@ -366,6 +390,18 @@
             "lawfulness": [0, 8],
             "sociability": [0, 8],
             "aggression": [8, 16],
+            "stability": [8, 16]
+        },
+        "tranquil": {
+            "lawfulness": [0, 8],
+            "sociability": [6, 10],
+            "aggression": [0, 4],
+            "stability": [8, 16]
+        },
+        "unpredictable": {
+            "lawfulness": [0, 8],
+            "sociability": [0, 8],
+            "aggression": [0, 8],
             "stability": [8, 16]
         },
         "attention-seeker": {

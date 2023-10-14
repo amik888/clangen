@@ -1,3 +1,148 @@
 [
-
+	{
+        "camp": "any",
+        "tags": [
+            "adoption",
+            "m_c",
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare"
+        ],
+        "reputation": [
+            "welcoming",
+            "neutral",
+            "hostile"
+        ],
+        "event_text": "m_c finds a tiny, abandoned kit at the clan's border, shivering and alone. Unable to simply leave, m_c takes the kit back and names {PRONOUN/n_c/object} n_c.",
+        "loner": true,
+        "kit": true,
+        "backstory": [
+            "abandoned1"
+        ],
+        "new_name": true,
+        "cat_trait": null,
+        "cat_skill": null,
+        "other_cat_trait": null,
+        "other_cat_skill": null
+    },
+    {
+        "camp": "any",
+        "tags": [
+            "m_c",
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare"
+        ],
+        "reputation": [
+            "welcoming",
+            "neutral"
+        ],
+        "event_text": "m_c has been aware of visits from a kittypet named n_c_pre, who has been curious about warriors and somewhere to fit in. After a long discussion, n_c_pre accepts m_c's offer to join the Clan. The kittypet decides to keep {PRONOUN/n_c/poss} old name.",
+        "kittypet": true,
+        "backstory": [
+            "kittypet1",
+            "kittypet2",
+            "kittypet3",
+            "refugee3",
+            "tragedy_survivor3",
+            "guided1"
+        ],
+        "cat_trait": null,
+        "cat_skill": null,
+        "other_cat_trait": null,
+        "other_cat_skill": null
+    },
+    {
+        "camp": "any",
+        "tags": [
+            "m_c",
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare"
+        ],
+        "reputation": [
+            "welcoming",
+            "neutral",
+            "hostile"
+        ],
+        "event_text": "m_c has been visited lately by a kittypet named n_c_pre, who talked about yearning for a life of adventure. m_c invited them to join the clan, and the kittypet eagerly accepts, stating that their new name shall be n_c.",
+        "kittypet": true,
+        "backstory": [
+            "kittypet1",
+            "kittypet2",
+            "kittypet3",
+            "refugee3",
+            "guided1"
+        ],
+        "new_name": true,
+        "cat_trait": null,
+        "cat_skill": null,
+        "other_cat_trait": null,
+        "other_cat_skill": null
+    },
+    {
+        "camp": "any",
+        "tags": [
+            "m_c",
+            "injured",
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare"
+        ],
+        "reputation": [
+            "welcoming",
+            "neutral",
+            "hostile"
+        ],
+        "event_text": "m_c is approached by a rogue named n_c_pre, who warns the leader about a dangerous group of loners that n_c_pre barely escaped. m_c accepts {PRONOUN/n_c/poss} request to join and take a new name, n_c.",
+        "loner": true,
+        "backstory": [
+            "rogue1",
+            "rogue2",
+            "rogue3",
+            "refugee4",
+            "tragedy_survivor2",
+            "guided2"
+        ],
+        "new_name": true,
+        "cat_trait": null,
+        "cat_skill": null,
+        "other_cat_trait": null,
+        "other_cat_skill": null
+    },
+    {
+        "camp": "any",
+        "tags": [
+            "m_c",
+            "Newleaf",
+            "Greenleaf",
+            "Leaf-fall",
+            "Leaf-bare"
+            "other_cat"
+        ],
+        "reputation": [
+            "welcoming",
+            "neutral",
+            "hostile"
+        ],
+        "event_text": "m_c and o_c were on patrol together when o_c was cornered by a dog. In a quick blur, a rogue cat leapt in front of o_c and gave the dog a face full of claws. Grateful to the loner for saving o_c, and respecting the strength, m_c offers {PRONOUN/n_c/poss} a place in the clan. n_c introduces {PRONOUN/n_c/poss}self and accepts.",
+        "loner": true,
+        "backstory": [
+            "rogue1",
+            "rogue2",
+            "rogue3",
+            "refugee4",
+            "tragedy_survivor2",
+            "guided2"
+        ],
+        "new_name": true,
+        "cat_trait": null,
+        "cat_skill": null,
+        "other_cat_trait": null,
+        "other_cat_skill": null
+    }
 ]

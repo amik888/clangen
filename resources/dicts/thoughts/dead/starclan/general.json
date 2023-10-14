@@ -126,7 +126,8 @@
     {
         "id": "founder_dead_to_alive_kit",
         "thoughts": [
-            "Is watching over the newest additions to {PRONOUN/m_c/poss} Clan"
+            "Is watching over the newest additions to {PRONOUN/m_c/poss} Clan",
+            "Wonders about the future of the clan with r_c now in it"
         ],
         "main_age_constraint": [
             "adolescent",
@@ -228,7 +229,8 @@
         "thoughts":[
             "Wants to let r_c know {PRONOUN/m_c/subject} {VERB/m_c/are/is} okay",
             "Wishes {PRONOUN/m_c/subject} could play with r_c",
-            "Is watching r_c play"
+            "Is watching r_c play",
+            "Hopes r_c doesn't forget {PRONOUN/m_c/object}"
         ],
         "main_age_constraint": [
             "newborn",
