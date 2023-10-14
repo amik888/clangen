@@ -207,7 +207,6 @@ class ProfileScreen(Screens):
                 #self.change_screen('ceremony screen')
                 print("inspect the thought wip")
                 print(self.the_cat.thought)
-                print(self.the_cat.thought_id)
                 
             elif event.ui_element == self.profile_elements["favourite_button"]:
                 self.the_cat.favourite = False
@@ -508,7 +507,7 @@ class ProfileScreen(Screens):
                                                                              , manager=MANAGER)
         
         # WIP: Create button to inspect thought if it has an event
-        if self.the_cat.thought_id is not None:
+        if self.the_cat.thought_id != '':
             self.profile_elements["thought_button"] = UIImageButton(scale(pygame.Rect((500, 120),(68,68))), "", 
                                             object_id="#magnify_button",
                                             manager=MANAGER)

@@ -334,4 +334,4 @@ class Thoughts():
             #TODO: 
             return inspectable_ids.index(thought_id)
         else:
-            return None
+            return ''

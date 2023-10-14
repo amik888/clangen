@@ -27,7 +27,7 @@ class ThoughtInspectScreen(Screens):
         self.hide_menu_buttons()
         self.the_cat = Cat.all_cats.get(game.switches['cat'])
         if self.the_cat.thought_id is None:
-            self.header = pygame_gui.elements.UITextBox(str(self.the_cat.name) + ' has no thoughts to inspect.',
+            self.header = pygame_gui.elements.UITextBox(str(self.the_cat.name) + ' has no thoughts to inspect. Id ' + str(self.the_cat.thought_id),
                                                         scale(pygame.Rect((200, 180), (1200, -1))),
                                                         object_id=get_text_box_theme(), manager=MANAGER)
         else:
