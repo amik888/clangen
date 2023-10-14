@@ -3,6 +3,7 @@ from .StartScreen import StartScreen
 from .PatrolScreen import PatrolScreen
 from .AllegiancesScreen import AllegiancesScreen
 from .CeremonyScreen import CeremonyScreen
+from .ThoughtInspectScreen import ThoughtInspectScreen
 from .ChooseAdoptiveParentScreen import ChooseAdoptiveParentScreen
 from .ProfileScreen import ProfileScreen
 from .RoleScreen import RoleScreen
@@ -86,6 +87,8 @@ choose_adoptive_parent_screen = ChooseAdoptiveParentScreen('choose adoptive pare
 relationship_screen = RelationshipScreen('relationship screen')
 view_children_screen = FamilyTreeScreen('see kits screen')
 mediation_screen = MediationScreen("mediation screen")
+
+thought_inspect_screen = ThoughtInspectScreen('thought inspect screen')
 
 
 outside_clan_screen = OutsideClanScreen('other screen')

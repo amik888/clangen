@@ -201,6 +201,14 @@ class ProfileScreen(Screens):
                 self.change_screen('med den screen')
             elif "mediation" in self.profile_elements and event.ui_element == self.profile_elements["mediation"]:
                 self.change_screen('mediation screen')
+            elif "thought_button" in self.profile_elements and \
+                 event.ui_element == self.profile_elements["thought_button"]:
+                self.change_screen('thought inspect screen')
+                #self.change_screen('ceremony screen')
+                print("inspect the thought wip")
+                print(self.the_cat.thought)
+                print(self.the_cat.thought_id)
+                
             elif event.ui_element == self.profile_elements["favourite_button"]:
                 self.the_cat.favourite = False
                 self.profile_elements["favourite_button"].hide()
@@ -385,6 +393,7 @@ class ProfileScreen(Screens):
         self.inspect_button = UIImageButton(scale(pygame.Rect((1482, 120),(68,68))), "", 
                                             object_id="#magnify_button",
                                             manager=MANAGER)
+        
         self.relations_tab_button = UIImageButton(scale(pygame.Rect((96, 840), (352, 60))), "",
                                                   object_id="#relations_tab_button", manager=MANAGER)
         self.roles_tab_button = UIImageButton(scale(pygame.Rect((448, 840), (352, 60))), "",
@@ -497,6 +506,12 @@ class ProfileScreen(Screens):
                                                                              object_id=get_text_box_theme(
                                                                                  "#text_box_30_horizcenter_spacing_95")
                                                                              , manager=MANAGER)
+        
+        # WIP: Create button to inspect thought if it has an event
+        if self.the_cat.thought_id is not None:
+            self.profile_elements["thought_button"] = UIImageButton(scale(pygame.Rect((500, 120),(68,68))), "", 
+                                            object_id="#magnify_button",
+                                            manager=MANAGER)
 
         self.profile_elements["cat_info_column1"] = UITextBoxTweaked(self.generate_column1(self.the_cat),
                                                                      scale(pygame.Rect((600, 460), (360, 380))),

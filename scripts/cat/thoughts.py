@@ -311,9 +311,27 @@ class Thoughts():
         # get possible thoughts
         try:
             chosen_thought_group = choice(Thoughts.load_thoughts(main_cat, other_cat, game_mode, biome, season, camp))
+            thought_id = chosen_thought_group["id"] # (testing) this is the ID of the thought pool chosen
+            thought_id = Thoughts.get_inspectable(thought_id)
+            #TODO: create a list of inspect thought groups
+                #One way to do this: id of "inspect" for specific thoughts that can be mapped to an inspect decision tree essentially
+                #another way: create a list of thought ids that can fall into "inspect" thoughts - populate value/id/index if it is in it, else leave null
+                    #this gives more options for inspect-able thoughts
+                    #may have faster lookup if the ids are indexes
             chosen_thought = choice(chosen_thought_group["thoughts"])
         except Exception:
             traceback.print_exc()
             chosen_thought = "Prrrp! You shouldn't see this! Report as a bug."
 
-        return chosen_thought
+        return chosen_thought, thought_id
+    
+    # returns the index / id of the thought if it is inspecctable - else null
+    # for thought inspection
+    @staticmethod
+    def get_inspectable(thought_id):
+        inspectable_ids = ['inspect', 'gen_to_dead_warrior', 'dark_forest_to_living_other', 'general_dead_to_alive_other']
+        if str(thought_id) in inspectable_ids:
+            #TODO: 
+            return inspectable_ids.index(thought_id)
+        else:
+            return None

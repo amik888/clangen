@@ -198,6 +198,7 @@ class Cat():
         self.outside = False
         self.dead_for = 0  # moons
         self.thought = ''
+        self.thought_id = ''
         self.genderalign = None
         self.birth_cooldown = 0
         self.illnesses = {}
@@ -1333,13 +1334,14 @@ class Cat():
 
         other_cat = all_cats.get(other_cat)
 
-        # get chosen thought
-        chosen_thought = Thoughts.get_chosen_thought(self, other_cat, game_mode, biome, season, camp)
-
+        # get chosen thought & id
+        chosen_thought, chosen_id = Thoughts.get_chosen_thought(self, other_cat, game_mode, biome, season, camp)
+        
         chosen_thought = event_text_adjust(Cat, chosen_thought, self, other_cat)
 
-        # insert thought
+        # insert thought & id
         self.thought = str(chosen_thought)
+        self.thought_id = str(chosen_id)
 
     def relationship_interaction(self):
         """Randomly choose a cat of the Clan and have a interaction with them."""
