@@ -1,0 +1,23 @@
+[
+		{
+		"id": "nightmare",
+		"text": ["A chill goes down r_c's spine when they ask the other cat for their name, but there is no response. Just a set of wide eyes looking back at them. m_c tilts their head slowly and r_c feels their heart pound in their chest."],
+		"to": ["wake_up_nightmare"],
+		"from": ["2"],
+		"tags": []
+	},
+	{
+		"id": "nightmare2",
+		"text": ["A chill goes down r_c's spine when they ask the other cat for their name, but there is no response. Just a set of wide eyes looking back at them. m_c tilts their head slowly and r_c feels their heart pound in their chest."],
+		"to": ["wake_up_nightmare"],
+		"from": ["2"],
+		"tags": []
+	},
+	{
+		"id": "wake_up_nightmare",
+		"text": ["r_c wakes with a start, still feeling their heartbeat quickening as though the danger hasn't left. They try not to think about what they saw. Later, although they can't stop thinking about it, something in their gut makes them nervous to mention it to anyone. They only smile and say they didn't sleep well."],
+		"to": [],
+		"from": ["nightmare"],
+		"tags": []
+	}
+]

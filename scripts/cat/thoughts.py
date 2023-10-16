@@ -318,6 +318,7 @@ class Thoughts():
                 #another way: create a list of thought ids that can fall into "inspect" thoughts - populate value/id/index if it is in it, else leave null
                     #this gives more options for inspect-able thoughts
                     #may have faster lookup if the ids are indexes
+            
             chosen_thought = choice(chosen_thought_group["thoughts"])
         except Exception:
             traceback.print_exc()
@@ -328,10 +329,155 @@ class Thoughts():
     # returns the index / id of the thought if it is inspecctable - else null
     # for thought inspection
     @staticmethod
-    def get_inspectable(thought_id):
+    def get_inspectable(thought_id) -> str:
         inspectable_ids = ['inspect', 'gen_to_dead_warrior', 'dark_forest_to_living_other', 'general_dead_to_alive_other']
         if str(thought_id) in inspectable_ids:
             #TODO: 
             return inspectable_ids.index(thought_id)
         else:
             return ''
+        
+        
+    @staticmethod
+    def load_roots() -> dict:
+        #load roots aka. inspect intros
+        base_path = f"resources/dicts/thoughts/inspect"
+        file = "intro"
+        INTROS = []
+        with open(f"{base_path}/{file}.json", 'r') as read_file:
+            INTROS = ujson.loads(read_file.read())
+        return INTROS
+        
+        
+    @staticmethod
+    def load_tree(root) -> list: 
+        #loads the decision tree for a root
+        base_path = f"resources/dicts/thoughts/inspect"
+        #load in all the inspect jsons
+        file = "decision_tree"
+        
+        #spec_dir = "/" + str(root) -not using this right now while prototyping, but may want to eventually
+            
+        DECISIONS = []
+        with open(f"{base_path}/{file}.json", 'r') as read_file:
+            DECISIONS = ujson.loads(read_file.read())
+        
+        return DECISIONS
+    
+    
+    @staticmethod
+    #get nodes from a particular parent node
+    #todo: rename to get_children or something similar.. child nodes...next nodes.. something
+    def get_nodes(inter_list, from_id, game_mode):
+        nodes = []
+        for inter in inter_list:
+            if str(from_id) in inter['from']:
+                nodes.append(dict(inter))
+        return nodes
+    
+    
+    @staticmethod
+    #get a node by a specific id
+    def get_node(node_list, node_id) -> dict:
+        node = {}
+        for node in node_list:
+            if str(node_id) == node['id']:
+                return node
+        return node
+    
+    
+    #get the next decision options from current
+    @staticmethod
+    def get_next_decisions(decision):
+        next_decisions = decision['to']
+        print(next_decisions)
+        return next_decisions
+        
+
+    #construct a path through decision tree with thought id as root
+    @staticmethod
+    def create_decision_path(thought_id, game_mode) -> list: #other_cat removed for now
+        decision_list = [str(thought_id)] #save the root id first
+        inter_list = Thoughts.load_tree(decision_list[0])
+        
+       
+        try:
+            
+            #get first node based on what root/thought it is from
+                #in: inspectable thought options, root id to filter, game_mode (not currently used)
+                #out: a list of 
+            possible_starts = Thoughts.get_nodes(inter_list, decision_list[0], game_mode)
+            
+            
+            #if no possible root node(s) found, don't traverse tree
+            if not possible_starts:
+                return decision_list
+            else:
+                conclusion = False
+                
+                #choose first node randomly
+                current_node = choice(possible_starts)
+                
+                
+                while not conclusion:
+                    next_node_options = current_node["to"] #gets next nodes if they exist - if not, it is a conclusion node
+                    node_id = current_node["id"] #gets current node id
+                    
+                    #add decision to the list
+                    decision_list.append(node_id)
+                    
+                    
+                    #check for more/next nodes
+                    #returns ["wake_up_nightmare"]
+                    #next_decisions = Thoughts.get_nodes(inter_list, node_id, game_mode)
+                    if(next_node_options):
+                        #make the decision for the next node
+                        #TODO: this will need a re-work to not be random!!!!
+                        next_id = choice(next_node_options)
+                        #move to the next node
+                        current_node = Thoughts.get_node(inter_list, next_id)
+                    else:
+                        #otherwise, we're done
+                        conclusion = True
+                
+        except Exception:
+            traceback.print_exc()
+            decision_list = [""]
+            #chosen_thought = "Prrrp! You shouldn't see this! Report as a bug."
+        return decision_list
+    
+        
+    @staticmethod
+    def get_node_text(decision_tree, node_id) -> str:
+        node = Thoughts.get_node(decision_tree, node_id)
+        text = choice(node['text'])
+        #todo: get_event_text utility function
+        return text
+    
+    
+    
+    
+        
+    @staticmethod
+    def get_decision_text(decision_path):
+        decision_text = []
+        if decision_path == []:
+            return ''
+        else:
+            root_id = decision_path[0]
+            
+            intros = Thoughts.load_roots()
+            decision_tree = Thoughts.load_tree(root_id)
+            
+            full_tree = intros + decision_tree
+            
+            for node_id in decision_path:
+                text = Thoughts.get_node_text(full_tree, node_id)
+                #print(text)
+                decision_text.append(text)
+            
+            final_text = " ".join(decision_text)
+            return final_text
+                
+            
+        

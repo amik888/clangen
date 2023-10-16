@@ -199,6 +199,7 @@ class Cat():
         self.dead_for = 0  # moons
         self.thought = ''
         self.thought_id = ''
+        self.decision_trees = [[]]
         self.genderalign = None
         self.birth_cooldown = 0
         self.illnesses = {}
@@ -1335,13 +1336,21 @@ class Cat():
         other_cat = all_cats.get(other_cat)
 
         # get chosen thought & id
-        chosen_thought, chosen_id = Thoughts.get_chosen_thought(self, other_cat, game_mode, biome, season, camp)
+        chosen_thought, inspectable_id = Thoughts.get_chosen_thought(self, other_cat, game_mode, biome, season, camp)
+        
+        #if thought is inspectable, get the inspect tree/list
+        if inspectable_id == 2: #todo: unset this from 2 -> != []
+            
+            
+            #populates the root of the tree
+            self.decision_trees[0].append(inspectable_id)
+            
         
         chosen_thought = event_text_adjust(Cat, chosen_thought, self, other_cat)
 
         # insert thought & id
         self.thought = str(chosen_thought)
-        self.thought_id = str(chosen_id)
+        self.thought_id = str(inspectable_id)
 
     def relationship_interaction(self):
         """Randomly choose a cat of the Clan and have a interaction with them."""

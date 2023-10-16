@@ -1,0 +1,17 @@
+[
+	{
+		"id": "2",
+		"text": ["m_c appears to r_c in a dream. r_c can't quite make out who this cat is, but it feels like {PRONOUN/r_c/subj} might know {PRONOUN/m_c/obj}."],
+		"to": ["nightmare"],
+		"from": [],
+		"tags": []
+	},
+	{
+		"id": "2",
+		"text": ["m_c appears to r_c in a dream. r_c can't quite make out who this cat is, but it feels like {PRONOUN/r_c/subj} might know {PRONOUN/m_c/obj}."],
+		"to": ["nightmare"],
+		"from": [],
+		"tags": []
+	}
+]
+
