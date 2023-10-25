@@ -25,6 +25,7 @@ class ThoughtInspectScreen(Screens):
         self.life_text = None
         self.header = None
         self.the_cat = None
+        self.other_cat = None #TODO: init other cat w/ thought somehoww
 
     def screen_switches(self):
         self.hide_menu_buttons()
@@ -43,7 +44,8 @@ class ThoughtInspectScreen(Screens):
             
             
             # compile root text from decision tree
-            decision_text = Thoughts.get_decision_text(self.the_cat.decision_trees[0])
+            
+            decision_text = Cat.get_decision_text(self.the_cat)
             
             #todo: rename variable
             self.life_text = decision_text
@@ -112,8 +114,9 @@ class ThoughtInspectScreen(Screens):
             if event.ui_element == self.back_button:
                 self.change_screen('profile screen')
             elif event.ui_element == self.elements["proceed"]: #TODO: make action buttons
-                path = Thoughts.create_decision_path(self.the_cat.thought_id, game.clan.game_mode) #todo: this is a temporary function to prototype, not the end goal
-                self.life_text = Thoughts.get_decision_text(path)
+                #todo: eventual input variable ~
+                path = Cat.create_decision_path(self.the_cat, game.clan.game_mode) #todo: this is a temporary function to prototype, not the end goal
+                self.life_text = Cat.get_decision_text(self.the_cat)
                 self.update_text(self.life_text)
             
             

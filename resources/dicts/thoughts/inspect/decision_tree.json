@@ -1,7 +1,10 @@
 [
 	{
 		"id": "nightmare",
-		"text": ["A chill goes down r_c's spine when they ask the other cat for their name, but there is no response. Just a set of wide eyes looking back at them. m_c tilts their head slowly and r_c feels their heart pound in their chest."],
+		"text": [
+			"A chill goes down r_c's spine when they ask the other cat for their name, but there is no response. Just a set of wide eyes looking back at them. m_c tilts their head slowly and r_c feels their heart pound in their chest.",
+			"m_c stalks behind r_c with their claws out, hiding in the shadows of r_c's dream."
+		],
 		"to": ["nightmare_worsen","wake_up_nightmare"],
 		"from": ["2"],
 		"tags": []
@@ -9,7 +12,7 @@
 	{
 		"id": "nightmare2",
 		"text": [
-			"r_c asks m_c for their name, and the other cat reassures r_c they are a long lost clan mentor and care about m_c. They've been watching the growth of r_c over the moons.",
+			"r_c asks m_c for their name, and the other cat reassures r_c they are a long lost clan mentor and care about r_c. They've been watching the growth of r_c over the moons.",
 			"m_c pretends to be a previous leader of their clan, and says they have been watching r_c strugggle to find their place in the clan.",
 			"m_c lies and says they are an ancestor of r_c and has been looking out for them, trying to send them a message.",
 			"m_c lies and says they are from StarClan and believe in r_c's ability to be a leader of the clan."
@@ -20,8 +23,9 @@
 	},
 	{
 		"id": "trusted",
-		"text": ["Although hesitant at first, r_c feels honored to be in the presence of a wise clan spirit. They ask what m_c has to tell them."
-			],
+		"text": [
+			"Although hesitant at first, r_c feels honored to be in the presence of a wise clan spirit. They ask what m_c has to tell them."
+		],
 		"to": ["temptation", "wake_up_uncertain"],
 		"from": ["nightmare2"],
 		"tags": []
@@ -52,7 +56,7 @@
 		"id": "nightmare_worsen",
 		"text": [
 			"Suddenly the ground beneath r_c's paws begins to shake and turn to mud. They find themselves sinking, fast.",
-			"m_c grows impossibly large and tall in front of r_c's eyes. The last thing r_c is the giant cat's claws and teeth coming straight towards them."
+			"m_c grows impossibly large and tall in front of r_c's eyes. The last thing r_c sees is the giant cat's claws and teeth coming straight towards them."
 		],
 		"to": ["wake_up_nightmare"],
 		"from": ["nightmare2", "nightmare", "suspicious"]
@@ -69,21 +73,27 @@
 	},
 	{
 		"id": "wake_up_comfort",
-		"text": ["r_c feels connected to m_c and reassured that some cat is looking out for them. They don't tell any other clan members. They want to keep m_c's support to themself."],
+		"text": [
+			"r_c feels connected to m_c and reassured that some cat is looking out for them. They don't tell any other clan members. They want to keep m_c's support to themself."
+		],
 		"to": [],
 		"from": ["trusted"],
 		"tags": []
 	},
 	{
 		"id": "wake_up_uncertain",
-		"text": ["Before anything else can happen, r_c wakes up. the next day they have a pounding headache and can't stop thinking about m_c. They feel like they keep catching glimpses of m_c around every corner."],
+		"text": [
+			"Before anything else can happen, r_c wakes up. the next day they have a pounding headache and can't stop thinking about m_c. They feel like they keep catching glimpses of m_c around every corner."
+		],
 		"to": [],
 		"from": ["nightmare2"],
 		"tags": []
 	},
 	{
 		"id": "wake_up_nightmare",
-		"text": ["r_c wakes with a start, still feeling their heartbeat quickening as though the danger hasn't left. They try not to think about what they saw. Later, although they can't stop thinking about it, something in their gut makes them nervous to mention it to anyone. They only smile and say they didn't sleep well."],
+		"text": [
+			"r_c wakes with a start, still feeling their heartbeat quickening as though the danger hasn't left. They try not to think about what they saw. Later, although they can't stop thinking about it, something in their gut makes them nervous to mention it to anyone. They only smile and say they didn't sleep well."
+		],
 		"to": [],
 		"from": ["nightmare"],
 		"tags": []

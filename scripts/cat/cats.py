@@ -199,6 +199,7 @@ class Cat():
         self.dead_for = 0  # moons
         self.thought = ''
         self.thought_id = ''
+        self.thinking_about = None
         self.decision_trees = [[]]
         self.genderalign = None
         self.birth_cooldown = 0
@@ -1338,10 +1339,11 @@ class Cat():
         # get chosen thought & id
         chosen_thought, inspectable_id = Thoughts.get_chosen_thought(self, other_cat, game_mode, biome, season, camp)
         
+        
         #if thought is inspectable, get the inspect tree/list
         if inspectable_id == 2: #todo: unset this from 2 -> != []
             
-            
+            self.thinking_about = other_cat
             #populates the root of the tree
             self.decision_trees[0].append(inspectable_id)
             
@@ -2867,6 +2869,95 @@ class Cat():
     def is_baby(self):
         return self.age in ["kitten", "newborn"]
     
+    #todo: need some sort of thought/text/cat manager that has access to Cat class
+    #basically need to move this function.. and probably some others that aren't relevant to thoughts.
+    
+    #TODO: since decision path is stored on the cat, just need main cat and other cat.
+        #TODO: clean that up & update reference in thoughtinspectscreen.py
+    @staticmethod
+    def get_decision_text(self):
+        decision_path=self.decision_trees[0]
+        other_cat=self.thinking_about
+        decision_text = []
+        if decision_path == []:
+            return ''
+        else:
+            root_id = decision_path[0]
+            
+            intros = Thoughts.load_roots()
+            decision_tree = Thoughts.load_tree(root_id)
+            
+            full_tree = intros + decision_tree
+            
+            for node_id in decision_path:
+                raw_text = Thoughts.get_node_text(full_tree, node_id)
+                #print(text)
+                #TODO: format the raw text
+                text = event_text_adjust(Cat, raw_text, self, other_cat)
+                decision_text.append(text)
+            
+            final_text = " ".join(decision_text)
+            return final_text
+        
+    @staticmethod
+    def add_decision(self):
+        decision_path = self.decision_trees[0]
+        
+        
+    #construct a path through decision tree with thought id as root
+    @staticmethod
+    def create_decision_path(self, game_mode) -> list: #other_cat removed for now
+        decision_list = [str(self.thought_id)] #save the root id first
+        inter_list = Thoughts.load_tree(decision_list[0])
+        
+       
+        try:
+            
+            #get first node based on what root/thought it is from
+                #in: inspectable thought options, root id to filter, game_mode (not currently used)
+                #out: a list of 
+            possible_starts = Thoughts.get_nodes(inter_list, decision_list[0], game_mode)
+            
+            
+            #if no possible root node(s) found, don't traverse tree
+            if not possible_starts:
+                return decision_list
+            else:
+                conclusion = False
+                
+                #choose first node randomly
+                current_node = choice(possible_starts)
+                
+                
+                while not conclusion:
+                    next_node_options = current_node["to"] #gets next nodes if they exist - if not, it is a conclusion node
+                    node_id = current_node["id"] #gets current node id
+                    
+                    #add decision to the list
+                    decision_list.append(node_id)
+                    
+                    
+                    #check for more/next nodes
+                    #returns ["wake_up_nightmare"]
+                    if(next_node_options):
+                        #make the decision for the next node
+                        #TODO: this will need a re-work to not be random!!!!
+                        next_id = choice(next_node_options)
+                        #move to the next node
+                        current_node = Thoughts.get_node(inter_list, next_id)
+                    else:
+                        #otherwise, we're done
+                        conclusion = True
+                
+        except Exception:
+            traceback.print_exc()
+            decision_list = [""]
+            #chosen_thought = "Prrrp! You shouldn't see this! Report as a bug."
+        self.decision_trees[0] = decision_list
+        return decision_list #this will be the tree for get_decision_text
+        
+        
+    
     def get_save_dict(self, faded=False):
         if faded:
             return {
@@ -2952,7 +3043,7 @@ class Cat():
 # ---------------------------------------------------------------------------- #
 #                               END OF CAT CLASS                               #
 # ---------------------------------------------------------------------------- #
-
+# todo: move this -> to personality.py
 # ---------------------------------------------------------------------------- #
 #                               PERSONALITY CLASS                              #
 # ---------------------------------------------------------------------------- #

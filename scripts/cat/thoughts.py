@@ -1,6 +1,7 @@
 import os
 import traceback
 from random import choice
+from scripts.utility import event_text_adjust
 
 import ujson
 
@@ -394,90 +395,29 @@ class Thoughts():
         return next_decisions
         
 
-    #construct a path through decision tree with thought id as root
-    @staticmethod
-    def create_decision_path(thought_id, game_mode) -> list: #other_cat removed for now
-        decision_list = [str(thought_id)] #save the root id first
-        inter_list = Thoughts.load_tree(decision_list[0])
-        
-       
-        try:
-            
-            #get first node based on what root/thought it is from
-                #in: inspectable thought options, root id to filter, game_mode (not currently used)
-                #out: a list of 
-            possible_starts = Thoughts.get_nodes(inter_list, decision_list[0], game_mode)
-            
-            
-            #if no possible root node(s) found, don't traverse tree
-            if not possible_starts:
-                return decision_list
-            else:
-                conclusion = False
-                
-                #choose first node randomly
-                current_node = choice(possible_starts)
-                
-                
-                while not conclusion:
-                    next_node_options = current_node["to"] #gets next nodes if they exist - if not, it is a conclusion node
-                    node_id = current_node["id"] #gets current node id
-                    
-                    #add decision to the list
-                    decision_list.append(node_id)
-                    
-                    
-                    #check for more/next nodes
-                    #returns ["wake_up_nightmare"]
-                    #next_decisions = Thoughts.get_nodes(inter_list, node_id, game_mode)
-                    if(next_node_options):
-                        #make the decision for the next node
-                        #TODO: this will need a re-work to not be random!!!!
-                        next_id = choice(next_node_options)
-                        #move to the next node
-                        current_node = Thoughts.get_node(inter_list, next_id)
-                    else:
-                        #otherwise, we're done
-                        conclusion = True
-                
-        except Exception:
-            traceback.print_exc()
-            decision_list = [""]
-            #chosen_thought = "Prrrp! You shouldn't see this! Report as a bug."
-        return decision_list
+    
     
         
     @staticmethod
     def get_node_text(decision_tree, node_id) -> str:
         node = Thoughts.get_node(decision_tree, node_id)
         text = choice(node['text'])
-        #todo: get_event_text utility function
         return text
     
     
-    
-    
-        
-    @staticmethod
-    def get_decision_text(decision_path):
-        decision_text = []
-        if decision_path == []:
-            return ''
-        else:
-            root_id = decision_path[0]
-            
-            intros = Thoughts.load_roots()
-            decision_tree = Thoughts.load_tree(root_id)
-            
-            full_tree = intros + decision_tree
-            
-            for node_id in decision_path:
-                text = Thoughts.get_node_text(full_tree, node_id)
-                #print(text)
-                decision_text.append(text)
-            
-            final_text = " ".join(decision_text)
-            return final_text
                 
+    @staticmethod
+    def add_decision_text(text, decision_path, node_id=None, main_cat=None, other_cat=None):
+        #text: the text to be appended to
+        #decision_path: the decision tree
+        #node_id: (optional) decision. otherwise will just get last decision path node's text
+        decision_tree = Thoughts.load_tree(decision_path[0])
+        raw_text = []
+        if node_id:
+            raw_text = Thoughts.get_node_text(decision_tree, node_id)
+        else:
+            raw_text = Thoughts.get_node_text(decision_tree, decision_path[-1]) #todo: check this syntax is right
             
-        
+        text_chunks = [text] + raw_text #TODO: format the raw text
+        final_text = " ".join(text_chunks)
+        return final_text
