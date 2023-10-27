@@ -201,6 +201,7 @@ class Cat():
         self.thought_id = ''
         self.thinking_about = None
         self.decision_trees = [[]]
+        self.decision_text = []
         self.genderalign = None
         self.birth_cooldown = 0
         self.illnesses = {}
@@ -2874,86 +2875,167 @@ class Cat():
     
     #TODO: since decision path is stored on the cat, just need main cat and other cat.
         #TODO: clean that up & update reference in thoughtinspectscreen.py
-    @staticmethod
+    
     def get_decision_text(self):
+        if not self.decision_text:
+            print("setting root text")
+            self.set_root_text()
+        else:
+            print("decision text exists")
+        text = str(self.decision_text[0])
+        return text
+            
+        
+#         decision_path=self.decision_trees[0]
+#         other_cat=self.thinking_about
+#         decision_text = []
+#         if decision_path == []:
+#             return ''
+#         else:
+#             root_id = decision_path[0]
+#             
+#             intros = Thoughts.load_roots()
+#             decision_tree = Thoughts.load_tree(root_id)
+#             
+#             full_tree = intros + decision_tree
+#             
+#             for node_id in decision_path:
+#                 raw_text = Thoughts.get_node_text(full_tree, node_id)
+#                 #print(text)
+#                 #TODO: format the raw text
+#                 text = event_text_adjust(Cat, raw_text, self, other_cat)
+#                 decision_text.append(text)
+#             
+#             final_text = " ".join(decision_text)
+            
+
+            
+        
+    
+    def add_decision_text(self, text_options):
+        raw_text = choice(text_options)
+        text = event_text_adjust(Cat, raw_text, self, self.thinking_about)
+        texts = [self.decision_text[0], text]
+        self.decision_text[0] = " ".join(texts)
+        
+    
+    def set_root_text(self):
         decision_path=self.decision_trees[0]
         other_cat=self.thinking_about
-        decision_text = []
+
         if decision_path == []:
-            return ''
+            text = ''
         else:
             root_id = decision_path[0]
             
             intros = Thoughts.load_roots()
-            decision_tree = Thoughts.load_tree(root_id)
-            
-            full_tree = intros + decision_tree
-            
-            for node_id in decision_path:
-                raw_text = Thoughts.get_node_text(full_tree, node_id)
-                #print(text)
-                #TODO: format the raw text
-                text = event_text_adjust(Cat, raw_text, self, other_cat)
-                decision_text.append(text)
-            
-            final_text = " ".join(decision_text)
-            return final_text
+            raw_text = Thoughts.get_node_text(intros, root_id)
+            text = event_text_adjust(Cat, raw_text, self, other_cat)
+        self.decision_text = [text]
         
-    @staticmethod
-    def add_decision(self):
-        decision_path = self.decision_trees[0]
+#     @staticmethod
+#     def add_decision(self):
+#         decision_path = self.decision_trees[0]
         
+    
+    def get_decision_path(self):
+        if self.decision_trees[0] is None:
+            start_tree(self)
+        return self.decision_trees[0]
+    
+    #gets the tree of decisions that can be made from the root
+    
+    def get_decision_tree(self):
+        root_id = str(self.thought_id)
+        decision_list = [root_id] #save the root id first
+        decision_tree = Thoughts.load_tree(root_id)
+        return decision_tree
+    
+        
+    #sets the tree to the root
+    def start_tree(self):
+        root_id = str(self.thought_id)
+        decision_list = [root_id] #save the root id as start of the tree
+        self.decision_trees[0] = decision_list
+        if decision_list == []:
+            text = ''
+        else:
+#             root_id = decision_path[0]
+            other_cat = self.thinking_about
+            intros = Thoughts.load_roots()
+            raw_text = Thoughts.get_node_text(intros, root_id)
+            text = event_text_adjust(Cat, raw_text, self, other_cat)
+        self.decision_text = [text]
+#         self.set_root_text(self)
+
         
     #construct a path through decision tree with thought id as root
-    @staticmethod
     def create_decision_path(self, game_mode) -> list: #other_cat removed for now
-        decision_list = [str(self.thought_id)] #save the root id first
-        inter_list = Thoughts.load_tree(decision_list[0])
+        #get latest node id
+        decision_list = self.get_decision_path()
+        latest_node_id = decision_list[-1]
         
-       
+        
+        #get the possible decisions tree
+        decision_tree = self.get_decision_tree()
+        
         try:
+            #get children of the current node
+                #in: inspectable thought options, root id we want "from", game_mode (not currently used)
+                #out: a list of nodes that come from the root
+            children = Thoughts.get_child_nodes(decision_tree, latest_node_id, game_mode) #nodes "from" current
+            next_nodes = [] #Thoughts.get_next_nodes(decision_tree, current_node) #current node's "to" nodes
             
-            #get first node based on what root/thought it is from
-                #in: inspectable thought options, root id to filter, game_mode (not currently used)
-                #out: a list of 
-            possible_starts = Thoughts.get_nodes(inter_list, decision_list[0], game_mode)
             
-            
-            #if no possible root node(s) found, don't traverse tree
-            if not possible_starts:
+            #if no possible next node(s) found, don't traverse tree anymore.
+            if not next_nodes and not children:
                 return decision_list
             else:
                 conclusion = False
                 
+            #TODO: take input of what choice is made. default to random
+            if True:
+                if next_nodes:
+                    chosen_node = choice(next_nodes)
+                elif children:
+                    chosen_node = choice(children)
+                else:
+                    return decision_list
+                
+                decision_list.append(chosen_node["id"]) #adds the choice to the decision list
+                self.add_decision_text(chosen_node["text"]) #adds the choice text
+            
+                
                 #choose first node randomly
-                current_node = choice(possible_starts)
+#                 current_node = choice(possible_starts)
                 
                 
-                while not conclusion:
-                    next_node_options = current_node["to"] #gets next nodes if they exist - if not, it is a conclusion node
-                    node_id = current_node["id"] #gets current node id
-                    
-                    #add decision to the list
-                    decision_list.append(node_id)
-                    
-                    
-                    #check for more/next nodes
-                    #returns ["wake_up_nightmare"]
-                    if(next_node_options):
-                        #make the decision for the next node
-                        #TODO: this will need a re-work to not be random!!!!
-                        next_id = choice(next_node_options)
-                        #move to the next node
-                        current_node = Thoughts.get_node(inter_list, next_id)
-                    else:
-                        #otherwise, we're done
-                        conclusion = True
+#                 while not conclusion:
+#                     next_node_options = current_node["to"] #gets next nodes if they exist - if not, it is a conclusion node
+#                     node_id = current_node["id"] #gets current node id
+#                     
+#                     #add decision to the list
+#                     decision_list.append(node_id)
+#                     
+#                     
+#                     #check for more/next nodes
+#                     #returns ["wake_up_nightmare"]
+#                     if(next_node_options):
+#                         #make the decision for the next node
+#                         #TODO: this will need a re-work to not be random!!!!
+#                         next_id = choice(next_node_options)
+#                         #move to the next node
+#                         current_node = Thoughts.get_node(inter_list, next_id)
+#                     else:
+#                         #otherwise, we're done
+#                         conclusion = True
                 
         except Exception:
             traceback.print_exc()
             decision_list = [""]
             #chosen_thought = "Prrrp! You shouldn't see this! Report as a bug."
         self.decision_trees[0] = decision_list
+        print(decision_list)
         return decision_list #this will be the tree for get_decision_text
         
         

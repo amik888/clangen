@@ -45,10 +45,11 @@ class ThoughtInspectScreen(Screens):
             
             # compile root text from decision tree
             
-            decision_text = Cat.get_decision_text(self.the_cat)
+#             decision_text = Cat.get_decision_text(self.the_cat)
             
             #todo: rename variable
-            self.life_text = decision_text
+            # init text
+            self.life_text = "Nothing has happened yet. Click Proceed.\nYou will have the option to choose between friendly, hostile, or random approaches." #decision_text 
             
             
             print("This feature isn't done yet!")
@@ -66,19 +67,21 @@ class ThoughtInspectScreen(Screens):
                                          object_id="#back_button", manager=MANAGER)
         
         
-        #action_1 = 
-        #self.action_buttons.append(UIImageButton(scale(pygame.Rect((500, 600), (200, 60))), "",
-        #                                 object_id="#back_button", manager=MANAGER))
-        
+        #todo: need a way to tell if this has already been written - returning to screen allows new to generate
+        #if inspection written -> disable proceed
         self.elements["proceed"] = UIImageButton(scale(pygame.Rect((1100, 866), (344, 60))), "",
                                                  object_id="#proceed_button",
                                                  starting_height=2, manager=MANAGER)
         
+        
+        
         self.scroll_container.set_scrollable_area_dimensions((1360 / 1600 * screen_x, self.text.rect[3]))
         
-    def update_text(self, new_text):
+    def update_text(self):
         self.text.kill()
         del self.text
+        new_text = self.the_cat.get_decision_text()
+        print(new_text)
         self.text = pygame_gui.elements.UITextBox(new_text,
                                                   scale(pygame.Rect((0, 0), (1100, -1))),
                                                   object_id=get_text_box_theme("#text_box_30_horizleft"),
@@ -113,11 +116,37 @@ class ThoughtInspectScreen(Screens):
         if event.type == pygame_gui.UI_BUTTON_START_PRESS:
             if event.ui_element == self.back_button:
                 self.change_screen('profile screen')
-            elif event.ui_element == self.elements["proceed"]: #TODO: make action buttons
+            elif event.ui_element == self.elements["proceed"]:
+                
+                #todo: add some text explaining each of the buttons
+                self.elements["proceed"].disable() 
+                self.elements["friendly_choice"] = UIImageButton(scale(pygame.Rect((646, 1200), (68, 68))), "",
+                                            object_id="#paw_patrol_button"
+                                            , manager=MANAGER)
+                
+                self.elements["hostile_choice"] = UIImageButton(scale(pygame.Rect((850, 1200), (68, 68))), "",
+                                            object_id="#claws_patrol_button"
+                                            , manager=MANAGER)
+                
+                self.elements["rand_choice"] = UIImageButton(scale(pygame.Rect((748, 1090), (68, 68))), "",
+                                            object_id="#events_cat_button"
+                                            , manager=MANAGER)
+                
                 #todo: eventual input variable ~
-                path = Cat.create_decision_path(self.the_cat, game.clan.game_mode) #todo: this is a temporary function to prototype, not the end goal
-                self.life_text = Cat.get_decision_text(self.the_cat)
-                self.update_text(self.life_text)
+                path = self.the_cat.get_decision_path() #only saving this variable for debugging right now.
+#                 path = Cat.create_decision_path(self.the_cat, game.clan.game_mode) #todo: this is a temporary function to prototype, not the end goal
+                self.life_text = self.the_cat.get_decision_text()
+                self.update_text()
+            elif event.ui_element == self.elements["friendly_choice"]:
+                print("Friendly/accepting path")
+                
+                #todo: get next node w/ choice & cat as parameter
+            elif event.ui_element == self.elements["hostile_choice"]:
+                print("Hostile/aggressive path")
+            elif event.ui_element == self.elements["rand_choice"]:
+                print("random path choice")
+                self.the_cat.create_decision_path(game.clan.game_mode)
+                self.update_text()
             
             
         

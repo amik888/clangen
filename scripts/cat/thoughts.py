@@ -369,11 +369,15 @@ class Thoughts():
     @staticmethod
     #get nodes from a particular parent node
     #todo: rename to get_children or something similar.. child nodes...next nodes.. something
-    def get_nodes(inter_list, from_id, game_mode):
+    def get_child_nodes(tree, parent_id, game_mode):
         nodes = []
-        for inter in inter_list:
-            if str(from_id) in inter['from']:
-                nodes.append(dict(inter))
+        parent_node = Thoughts.get_node(tree, parent_id)
+        next_decision_ids = Thoughts.get_next_decisions(parent_node)
+        for node in tree:
+            if node['id'] in next_decision_ids:
+                nodes.append(dict(node))
+            if str(parent_id) in node['from']:
+                nodes.append(dict(node))
         return nodes
     
     
@@ -397,11 +401,14 @@ class Thoughts():
 
     
     
-        
+    #get the text from a specific decision node
     @staticmethod
     def get_node_text(decision_tree, node_id) -> str:
         node = Thoughts.get_node(decision_tree, node_id)
+        #choose a text option from the node randomly
+        #adds variety to how a situation can be described
         text = choice(node['text'])
+        
         return text
     
     
