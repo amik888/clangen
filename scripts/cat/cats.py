@@ -365,7 +365,8 @@ class Cat():
                              self.pelt.tortiepattern,
                              biome=biome,
                              specsuffix_hidden=self.specsuffix_hidden,
-                             load_existing_name=loading_cat)
+                             load_existing_name=loading_cat,
+                             moons=self.moons)
         else:
             self.name = Name(status, prefix, suffix, eyes=self.pelt.eye_colour, specsuffix_hidden=self.specsuffix_hidden,
                              load_existing_name = loading_cat)
@@ -413,7 +414,8 @@ class Cat():
         This is used to kill a cat.
 
         body - defaults to True, use this to mark if the body was recovered so
-        that grief messages will align with body status
+        that grief messages will align with body status 
+        - if it is None, a lost cat died and therefore not trigger grief, since the clan does not know
 
         May return some additional text to add to the death event.
         """
@@ -453,7 +455,7 @@ class Cat():
                 fetched_cat.update_mentor()
         self.update_mentor()
 
-        if game.clan.game_mode != 'classic' and not (self.outside or self.exiled):
+        if game.clan and game.clan.game_mode != 'classic' and not (self.outside or self.exiled) and body != None:
             self.grief(body)
 
         if not self.outside:
@@ -1608,7 +1610,7 @@ class Cat():
         if duration == 0:
             duration = 1
 
-        if game.clan.game_mode == "cruel season":
+        if game.clan and game.clan.game_mode == "cruel season":
             if mortality != 0:
                 mortality = int(mortality * 0.5)
                 med_mortality = int(med_mortality * 0.5)
@@ -1644,7 +1646,7 @@ class Cat():
             }
 
     def get_injured(self, name, event_triggered=False, lethal=True, severity='default'):
-        if game.clan.game_mode == "classic":
+        if game.clan and game.clan.game_mode == "classic":
             return
         
         if name not in INJURIES:
@@ -1675,7 +1677,7 @@ class Cat():
             duration = 1
 
         if mortality != 0:
-            if game.clan.game_mode == "cruel season":
+            if game.clan and game.clan.game_mode == "cruel season":
                 mortality = int(mortality * 0.5)
 
                 if mortality == 0:
@@ -1774,7 +1776,7 @@ class Cat():
         new_condition = False
         mortality = condition["mortality"][self.age]
         if mortality != 0:
-            if game.clan.game_mode == "cruel season":
+            if game.clan and game.clan.game_mode == "cruel season":
                 mortality = int(mortality * 0.65)
 
         if condition['congenital'] == 'always':
@@ -1821,17 +1823,24 @@ class Cat():
 
     def not_working(self):
         """returns True if the cat cannot work, False if the cat can work"""
-        not_working = False
         for illness in self.illnesses:
             if self.illnesses[illness]['severity'] != 'minor':
-                not_working = True
-                break
+                return True
         for injury in self.injuries:
             if self.injuries[injury]['severity'] != 'minor':
-                not_working = True
-                break
-        return not_working
+                return True
+        return False
 
+    def not_work_because_hunger(self):
+        """returns True if the only condition, why the cat cannot work is because of starvation"""
+        non_minor_injuries = [injury for injury in self.injuries if self.injuries[injury]['severity'] != 'minor']
+        if len(non_minor_injuries) > 0:
+            return False
+        non_minor_illnesses = [illness for illness in self.illnesses if self.illnesses[illness]['severity'] != 'minor']
+        if "starving" in non_minor_illnesses and len(non_minor_illnesses) == 1:
+            return True
+        else:
+            return False
     
     def retire_cat(self):
         """This is only for cats that retire due to health condition"""
@@ -2112,6 +2121,10 @@ class Cat():
         #Former mentor
         is_former_mentor = (other_cat.ID in self.former_apprentices or self.ID in other_cat.former_apprentices)
         if is_former_mentor and not game.clan.clan_settings['romantic with former mentor']:
+            return False
+
+        #current mentor
+        if other_cat.ID in self.apprentice or self.ID in other_cat.apprentice:
             return False
 
         return True
@@ -2459,9 +2472,9 @@ class Cat():
                 EX_gain = randint(10, 24)
 
                 gm_modifier = 1
-                if game.clan.game_mode == 'expanded':
+                if game.clan and game.clan.game_mode == 'expanded':
                     gm_modifier = 3
-                elif game.clan.game_mode == 'cruel season':
+                elif game.clan and game.clan.game_mode == 'cruel season':
                     gm_modifier = 6
 
                 if mediator.experience_level == "average":
@@ -2724,21 +2737,23 @@ class Cat():
     # ---------------------------------------------------------------------------- #
 
     @staticmethod
-    def sort_cats():
+    def sort_cats(given_list=[]):
+        if not given_list:
+            given_list = Cat.all_cats_list
         if game.sort_type == "age":
-            Cat.all_cats_list.sort(key=lambda x: Cat.get_adjusted_age(x))
+            given_list.sort(key=lambda x: Cat.get_adjusted_age(x))
         elif game.sort_type == "reverse_age":
-            Cat.all_cats_list.sort(key=lambda x: Cat.get_adjusted_age(x), reverse=True)
+            given_list.sort(key=lambda x: Cat.get_adjusted_age(x), reverse=True)
         elif game.sort_type == "id":
-            Cat.all_cats_list.sort(key=lambda x: int(x.ID))
+            given_list.sort(key=lambda x: int(x.ID))
         elif game.sort_type == "reverse_id":
-            Cat.all_cats_list.sort(key=lambda x: int(x.ID), reverse=True)
+            given_list.sort(key=lambda x: int(x.ID), reverse=True)
         elif game.sort_type == "rank":
-            Cat.all_cats_list.sort(key=lambda x: (Cat.rank_order(x), Cat.get_adjusted_age(x)), reverse=True)
+            given_list.sort(key=lambda x: (Cat.rank_order(x), Cat.get_adjusted_age(x)), reverse=True)
         elif game.sort_type == "exp":
-            Cat.all_cats_list.sort(key=lambda x: x.experience, reverse=True)
+            given_list.sort(key=lambda x: x.experience, reverse=True)
         elif game.sort_type == "death":
-            Cat.all_cats_list.sort(key=lambda x: -1 * int(x.dead_for))
+            given_list.sort(key=lambda x: -1 * int(x.dead_for))
 
         return
 
