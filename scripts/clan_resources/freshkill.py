@@ -119,6 +119,7 @@ class Freshkill_Pile():
         Update the total amount of the prey pile
         """
         self.total_amount = sum(self.pile.values())
+        
 
     def _update_needed_food(self, living_cats: List[Cat]) -> None:
         queen_dict, living_kits = get_alive_clan_queens(self.living_cats)
@@ -154,21 +155,33 @@ class Freshkill_Pile():
                 list of living cats which should be feed
         """
         self.living_cats = living_cats
-        previous_amount = 0
-        # update the freshkill pile
-        for key, value in self.pile.items():
-            self.pile[key] = previous_amount
-            previous_amount = value
-            if key == "expires_in_1" and FRESHKILL_ACTIVE and value > 0:
-                amount = round(value, 2)
-                event_list.append(f"Some prey expired, {amount} pieces were removed from the pile.")
-        self.total_amount = sum(self.pile.values())
-        value_diff = self.total_amount
-        self.feed_cats(living_cats)
-        value_diff -= sum(self.pile.values())
-        event_list.append(f"{value_diff} pieces of prey were consumed.")
-        self._update_needed_food(living_cats)
-        self.update_total_amount()
+        
+        if(game.clan.clan_settings.get('always enough freshkill')):
+            print("enough freshkill is turned on.")
+            self.total_amount = self.needed_prey
+            self.add_freshkill(self.needed_prey)
+            self.feed_cats(living_cats)
+            self.update_total_amount()
+        else:
+            previous_amount = 0
+            # update the freshkill pile
+            for key, value in self.pile.items():
+                self.pile[key] = previous_amount
+                previous_amount = value
+                if key == "expires_in_1" and FRESHKILL_ACTIVE and value > 0:
+                    amount = round(value, 2)
+                    event_list.append(f"Some prey expired, {amount} pieces were removed from the pile.")
+            self.total_amount = sum(self.pile.values())
+            value_diff = self.total_amount
+            self.feed_cats(living_cats)
+            value_diff -= sum(self.pile.values())
+            event_list.append(f"{value_diff} pieces of prey were consumed.")
+            self._update_needed_food(living_cats)
+            self.update_total_amount()
+            
+        
+        
+        
 
     def feed_cats(self, living_cats: list, not_moon_feeding = False) -> None:
         """

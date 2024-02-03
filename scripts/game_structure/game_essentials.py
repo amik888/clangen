@@ -134,7 +134,8 @@ class Game():
         'window_open': False,
         'skip_conditions': [],
         'show_history_moons': False,
-        'fps': 30
+        'fps': 30,
+        'always_enough_freskhill': False
     }
     all_screens = {}
     cur_events = {}
@@ -355,10 +356,12 @@ class Game():
                 settings_data = ujson.loads(read_file.read())
         except FileNotFoundError:
             return
-
+    
         for key, value in settings_data.items():
             if key in self.settings:
                 self.settings[key] = value
+                
+        
 
         self.switches['language'] = self.settings['language']
         if self.settings['language'] != 'english':

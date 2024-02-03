@@ -59,6 +59,11 @@
             "Show moons and seasons widget",
             "Displays Clan age and current Clan season on several pages",
             false
+        ],
+        "always enough freshkill":[
+            "Always enough freshkill",
+            "Always have enough freshkill to feed your clan",
+            false
         ]
     },
     "role": {
