@@ -94,6 +94,9 @@ class MiscEvents():
         event_text = event_text_adjust(Cat, misc_event.event_text, cat, other_cat, other_clan_name, murder_reveal=reveal, victim=victim)
         
         if event_text:
+            # WIP: add event text as history text for the cat
+            #add_event_history(cat, history_text, other_cat)
+            History.add_event_history(cat, str(event_text), other_cat)
             # Add event text to the relationship log if two cats are involved
             if other_cat:
                 pos_rel_event = ["romantic", "platonic", "neg_dislike", "respect", "comfort", "neg_jealousy", "trust"]

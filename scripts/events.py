@@ -743,7 +743,7 @@ class Events:
         cat.one_moon()
 
         # Handle Mediator Events
-        self.mediator_events(cat)
+        self.mediator_events(cat) #TODO: check mediator_events to write event history
 
         # handle nutrition amount
         # (CARE: the cats has to be fed before - should be handled in "one_moon" function)
@@ -809,7 +809,7 @@ class Events:
             return
 
         self.invite_new_cats(cat)
-        self.other_interactions(cat)
+        self.other_interactions(cat) #TODO: check other_interactions to write event history
         self.gain_accessories(cat)
 
         # switches between the two death handles

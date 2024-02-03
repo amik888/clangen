@@ -14,6 +14,8 @@ class History:
                  app_ceremony=None,
                  lead_ceremony=None,
                  possible_history=None,
+                 event_history=None,
+                 patrol_history=None,
                  died_by=None,
                  scar_events=None,
                  murder=None
@@ -23,6 +25,8 @@ class History:
         self.app_ceremony = app_ceremony if app_ceremony else {}
         self.lead_ceremony = lead_ceremony if lead_ceremony else None
         self.possible_history = possible_history if possible_history else {}
+        self.event_history = event_history if event_history else []
+        self.patrol_history = patrol_history if patrol_history else []
         self.died_by = died_by if died_by else []
         self.scar_events = scar_events if scar_events else []
         self.murder = murder if murder else {}
@@ -76,6 +80,16 @@ class History:
                 "scar_text": text
                 },
             },
+        "event_history": [
+                {
+                    "moon": game.clan.age / moon,
+                    "history_text": text
+                },
+                {
+                    "moon": game.clan.age / moon,
+                    "history_text": text
+                }
+            ],
         "died_by": [
             {
                 "involved": ID,
@@ -138,6 +152,8 @@ class History:
             "app_ceremony": cat.history.app_ceremony,
             "lead_ceremony": cat.history.lead_ceremony,
             "possible_history": cat.history.possible_history,
+            "event_history": cat.history.event_history,
+            "patrol_history": cat.history.patrol_history,
             "died_by": cat.history.died_by,
             "scar_events": cat.history.scar_events,
             "murder": cat.history.murder,
@@ -364,6 +380,45 @@ class History:
 
         if condition in cat.history.possible_history:
             cat.history.possible_history.pop(condition)
+            
+            
+    @staticmethod
+    #event history tracking
+        # can track misc events (relationships are already tracked)
+            # idea: can add a history_text attribute to misc_event objects - if it is present, add to the history
+        # murder reveals
+        # accessories
+        # death reactions
+        # war
+        # 
+        # manual input
+    #possible inputs:
+        # effect (positive / negative)
+        # necessary: cat
+        # necessary: event - some description
+    def add_event_history(cat, history_text, other_cat=None):
+        """
+        this adds events to the cat's history
+        :param cat: cat object
+        :param history_text: text for history
+        :param other_cat: cat object of other cat involved. 
+        """
+        if not game.clan:
+            return
+            
+        History.check_load(cat)
+        
+        if other_cat is not None:
+            other_cat = other_cat.ID
+        
+        cat.history.event_history.append({
+            "involved": other_cat,
+            "history_text": history_text, 
+            "moon": game.clan.age
+        })
+        
+        
+
     
     @staticmethod
     def add_death(cat, death_text, condition=None, other_cat=None, extra_text=None):
@@ -523,6 +578,18 @@ class History:
         if not cat.history.lead_ceremony:
             History.add_lead_ceremony(cat)
         return str(cat.history.lead_ceremony)
+    
+    @staticmethod
+    def get_event_history(cat):
+        """
+        returns the event history list of the given cat
+        """
+        History.check_load(cat)
+        events = cat.history.event_history
+        if not events:
+            return None
+        else:
+            return events
 
     @staticmethod
     def get_possible_history(cat, condition=None):

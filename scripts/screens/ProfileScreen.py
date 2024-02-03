@@ -1077,6 +1077,11 @@ class ProfileScreen(Screens):
             # join scar and death into one paragraph
             if body_history:
                 life_history.append(" ".join(body_history))
+                
+            event_history = self.get_event_text()
+            if event_history:
+                life_history.append(event_history)
+            
 
             murder = self.get_murder_text()
             if murder:
@@ -1316,6 +1321,42 @@ class ProfileScreen(Screens):
             else:
                 return event_text_adjust(Cat, event["unrevealed_text"], self.the_cat, Cat.fetch_cat(death["involved"]))
         return None
+    
+    def get_event_text(self):
+        """
+        returns adjusted event history text
+        """
+        text = None
+        event_history = self.the_cat.history.get_event_history(self.the_cat)
+        if game.switches['show_history_moons']:
+            moons = True
+        else:
+            moons = False
+            
+        
+
+        # if we got a list of events, write all the history text for them
+        if event_history:
+            print(event_history)
+            print(type(event_history))
+            
+            event_text = []
+            #TODO: may want to sort them by moon if they are not automatically.
+            #likely when writing it will be done in order of chronology, so as long as we retrieve in the same order we write, we're good.
+            
+            #TODO: want another if block to account for moons (don't put the if statement in the for loop, you can check once before instead of checking every time)
+            for event in event_history:
+                hist_text = dict(event).get("history_text")
+                print(hist_text)
+                event_text.append(hist_text)
+                print(event_text)
+            event_text_str = ". ".join(event_text)
+            print(event_text_str)
+            #TODO: there may be cases where other cats are involved. not a priority right now, but keep an eye out for histories that don't make sense w/o other cat.
+            
+            return event_text_str
+        else:
+            return ""
 
 
     def get_death_text(self):
