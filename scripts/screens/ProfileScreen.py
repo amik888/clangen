@@ -1328,25 +1328,32 @@ class ProfileScreen(Screens):
         """
         text = None
         event_history = self.the_cat.history.get_event_history(self.the_cat)
+        if not event_history:
+            return ""
         if game.switches['show_history_moons']:
             moons = True
         else:
             moons = False
             
-        
+        event_text = []
 
         # if we got a list of events, write all the history text for them
-        if event_history:
+        if moons:
             print(event_history)
             print(type(event_history))
+            print("moons is true")
             
-            event_text = []
+            
             #TODO: may want to sort them by moon if they are not automatically.
             #likely when writing it will be done in order of chronology, so as long as we retrieve in the same order we write, we're good.
             
             #TODO: want another if block to account for moons (don't put the if statement in the for loop, you can check once before instead of checking every time)
             for event in event_history:
-                hist_text = dict(event).get("history_text")
+                hist_text = event.get("history_text")
+                moon_text = " (Moon " + str(event.get("moon")) + ")"
+                print(moon_text)
+                
+                hist_text += moon_text
                 print(hist_text)
                 event_text.append(hist_text)
                 print(event_text)
@@ -1356,7 +1363,16 @@ class ProfileScreen(Screens):
             
             return event_text_str
         else:
-            return ""
+            for event in event_history:
+                hist_text = event.get("history_text")
+                
+                event_text.append(hist_text)
+                print(event_text)
+            event_text_str = ". ".join(event_text)
+            print(event_text_str)
+            #TODO: there may be cases where other cats are involved. not a priority right now, but keep an eye out for histories that don't make sense w/o other cat.
+            
+            return event_text_str
 
 
     def get_death_text(self):
