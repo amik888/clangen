@@ -1347,11 +1347,11 @@ class ProfileScreen(Screens):
             #TODO: want another if block to account for moons (don't put the if statement in the for loop, you can check once before instead of checking every time)
             for event in event_history:
                 hist_text = event.get("history_text")
-                moon_text = " (Moon " + str(event.get("moon")) + ")"
+                moon_text = " (Moon " + str(event.get("moon")) + ")."
                 
                 hist_text += moon_text
                 event_text.append(hist_text)
-            event_text_str = ". ".join(event_text)
+            event_text_str = " ".join(event_text)
             #TODO: there may be cases where other cats are involved. not a priority right now, but keep an eye out for histories that don't make sense w/o other cat.
             
             return event_text_str
