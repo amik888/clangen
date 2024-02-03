@@ -411,6 +411,7 @@ class History:
         if other_cat is not None:
             other_cat = other_cat.ID
         
+        cat.history.event_history = History.get_event_history(cat)
         cat.history.event_history.append({
             "involved": other_cat,
             "history_text": history_text, 
@@ -587,7 +588,7 @@ class History:
         History.check_load(cat)
         events = cat.history.event_history
         if not events:
-            return None
+            return []
         else:
             return events
 
