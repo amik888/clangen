@@ -1339,9 +1339,6 @@ class ProfileScreen(Screens):
 
         # if we got a list of events, write all the history text for them
         if moons:
-            print(event_history)
-            print(type(event_history))
-            print("moons is true")
             
             
             #TODO: may want to sort them by moon if they are not automatically.
@@ -1351,14 +1348,10 @@ class ProfileScreen(Screens):
             for event in event_history:
                 hist_text = event.get("history_text")
                 moon_text = " (Moon " + str(event.get("moon")) + ")"
-                print(moon_text)
                 
                 hist_text += moon_text
-                print(hist_text)
                 event_text.append(hist_text)
-                print(event_text)
             event_text_str = ". ".join(event_text)
-            print(event_text_str)
             #TODO: there may be cases where other cats are involved. not a priority right now, but keep an eye out for histories that don't make sense w/o other cat.
             
             return event_text_str
@@ -1369,7 +1362,6 @@ class ProfileScreen(Screens):
                 event_text.append(hist_text)
                 print(event_text)
             event_text_str = ". ".join(event_text)
-            print(event_text_str)
             #TODO: there may be cases where other cats are involved. not a priority right now, but keep an eye out for histories that don't make sense w/o other cat.
             
             return event_text_str
