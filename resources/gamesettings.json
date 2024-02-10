@@ -65,6 +65,11 @@
             "Randomize relationship values when creating Clan",
             "Clan founder cats will start the game with established relationships.",
             true
+        ],
+        "dev tools": [
+            "(CAUTION: WIP MOD SETTING) Enable dev tools",
+            "Enable access to file editing tools for mod development.",
+            false
         ]
     },
     "..": "these are special. they do not have a display name or a tooltip",

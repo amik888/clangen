@@ -65,6 +65,7 @@ class StartScreen(Screens):
                 self.switch_clan_button: 'switch clan screen',
                 self.new_clan_button: 'make clan screen',
                 self.settings_button: 'settings screen',
+                self.dev_tools_button: 'dev tools menu',
             }
             if event.ui_element in screens:
                 self.change_screen(screens[event.ui_element])
@@ -137,6 +138,7 @@ class StartScreen(Screens):
         self.switch_clan_button.kill()
         self.new_clan_button.kill()
         self.settings_button.kill()
+        self.dev_tools_button.kill()
         self.error_label.kill()
         self.warning_label.kill()
         self.update_button.kill()
@@ -220,6 +222,16 @@ class StartScreen(Screens):
             starting_height=3,
             manager=MANAGER
         )
+        
+        self.dev_tools_button = UIImageButton(scale(
+            pygame.Rect((25, 1200), (356, 60))),
+            "",
+            object_id="#tmp_dev_tools_button",
+            manager=MANAGER,
+            tool_tip_text="(Caution: these tools are modded"
+                          " and not part of base gameplay!)"
+                          "Edit personality traits and other"
+                          " data files")
 
         self.open_data_directory_button = UIImageButton(
             scale(pygame.Rect((1040, 1020), (356, 60))),
@@ -296,6 +308,11 @@ class StartScreen(Screens):
             self.continue_button.enable()
         else:
             self.continue_button.disable()
+        #TODO: condition for dev tools button to be enabled
+        if game.settings['dev tools']:
+            self.dev_tools_button.enable()
+        else:
+            self.dev_tools_button.disable()
 
         if len(game.switches['clan_list']) > 1:
             self.switch_clan_button.enable()

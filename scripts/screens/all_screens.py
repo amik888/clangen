@@ -21,6 +21,8 @@ from .FamilyTreeScreen import FamilyTreeScreen
 from .MediationScreen import MediationScreen
 from .ClanSettingsScreen import ClanSettingsScreen
 from .ClearingScreen import ClearingScreen
+from .dev_tools.DevToolsMenu import DevToolsMenu
+from .dev_tools.EditTraitsScreen import EditTraitsScreen
 
 # ---------------------------------------------------------------------------- #
 #                                  UI RULES                                    #
@@ -82,4 +84,8 @@ choose_adoptive_parent_screen = ChooseAdoptiveParentScreen('choose adoptive pare
 relationship_screen = RelationshipScreen('relationship screen')
 view_children_screen = FamilyTreeScreen('see kits screen')
 mediation_screen = MediationScreen("mediation screen")
+
+#dev tools screens
+dev_tools_menu = DevToolsMenu('dev tools menu')
+edit_traits_screen = EditTraitsScreen('edit_traits')
 

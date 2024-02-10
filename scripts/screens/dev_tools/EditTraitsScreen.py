@@ -9,22 +9,22 @@ import pygame
 import pygame_gui
 import ujson
 
-from scripts.game_structure.discord_rpc import _DiscordRPC
-from scripts.game_structure.game_essentials import game, screen_x, screen_y, MANAGER
-from scripts.game_structure.image_button import UIImageButton
-from scripts.game_structure.windows import SaveError
-from scripts.utility import get_text_box_theme, scale, quit  # pylint: disable=redefined-builtin
-from .Screens import Screens
-from ..housekeeping.datadir import get_data_dir
-from ..housekeeping.version import get_version_info
+
+from ...game_structure.game_essentials import game, screen_x, screen_y, MANAGER
+from ...game_structure.image_button import UIImageButton
+from ...game_structure.windows import SaveError
+from ...utility import get_text_box_theme, scale, quit  # pylint: disable=redefined-builtin
+from ..Screens import Screens
+from ...housekeeping.datadir import get_data_dir
+from ...housekeeping.version import get_version_info
 
 
 logger = logging.getLogger(__name__)
 
-with open('resources/gamesettings.json', 'r', encoding='utf-8') as f:
-    settings_dict = ujson.load(f)
 
-class SettingsScreen(Screens):
+
+
+class EditTraitsScreen(Screens):
     """
     TODO: DOCS
     """
@@ -34,37 +34,37 @@ class SettingsScreen(Screens):
         '2': 'big'
     }  # How text sizes will show up on the screen
     bool = {True: 'Yes', False: 'No', None: 'None'}
-    sub_menu = 'general'
+    sub_menu = 'info'
 
-    # This is set to the current settings when the screen is opened.
-    # All edits are made directly to game.settings, however, when you
-    #  leave the screen,game.settings will be reverted based on this variable
-    #   However, if settings are saved, edits will also be made to this variable.
-    settings_at_open = {}
+    # has the file been changed since the page was open or since file was saved?
+    file_changed = False
 
-    # Have the settings been changed since the page was open or since settings were saved?
-    settings_changed = False
+    text_objects = {}
+    traits_dict = {}
+    
 
-    # Contains the checkboxes
-    checkboxes = {}
-    # Contains the text for the checkboxes.
-    checkboxes_text = {}
 
-    # contains the tooltips for contributors
-    tooltip = {}
+    info_text = "This is a work-in-progress menu for development tools. The main purpose is to make file editing for mod development easier."
+    
+    def __init__(self, name=None):
+        super().__init__(name)
+        with open('resources/dicts/traits/trait_ranges.json', 'r', encoding='utf-8') as f:
+            self.traits_dict = ujson.load(f)
 
-    info_text = ""
-    tooltip_text = []
-    with open('resources/credits_text.json', 'r', encoding='utf-8') as f:
-        credits_text = ujson.load(f)
-    for string in credits_text["text"]:
-        if string == "{contrib}":
-            for contributor in credits_text["contrib"]:
-                info_text += contributor + "<br>"
-                tooltip_text.append(credits_text["contrib"][contributor])
-        else:
-            info_text += string
-            info_text += "<br>"
+    # trait_type == 'normal_traits' or 'kit_traits'
+#     for trait_type in traits_dict:
+#         traits[trait_type] = traits_dict.get(trait_type)
+        
+    
+
+    def get_normal_traits(self):
+        trait_list = self.traits_dict.get('normal_traits').keys()
+        return trait_list
+    
+    def get_kit_traits(self):
+        trait_list = self.traits_dict.get('kit_traits').keys()
+        return trait_list
+        
 
     def handle_event(self, event):
         """
@@ -105,16 +105,17 @@ class SettingsScreen(Screens):
                 self.settings_changed = False
                 self.update_save_button()
                 return
-            elif event.ui_element == self.general_settings_button:
-                self.open_general_settings()
+
+            elif event.ui_element == self.normal_traits:
+                self.open_normal_traits()
                 return
-            elif event.ui_element == self.info_button:
-                self.open_info_screen()
+            elif event.ui_element == self.kit_traits:
+                self.open_kit_traits()
                 return
-            elif event.ui_element == self.language_button:
-                self.open_lang_settings()
-            if self.sub_menu in ['general', 'relation', 'language']:
-                self.handle_checkbox_events(event)
+#             elif event.ui_element == self.language_button:
+#                 self.open_lang_settings()
+#             if self.sub_menu in ['general', 'relation', 'language']:
+#                 self.handle_checkbox_events(event)
 
         elif event.type == pygame.KEYDOWN and game.settings['keybinds']:
             if event.key == pygame.K_ESCAPE:
@@ -126,7 +127,7 @@ class SettingsScreen(Screens):
                     self.open_lang_settings()
             elif event.key == pygame.K_LEFT:
                 if self.sub_menu == 'info':
-                    self.open_general_settings()
+                    self.open_general_tools()
                 elif self.sub_menu == 'language':
                     self.open_info_screen()
 
@@ -155,20 +156,20 @@ class SettingsScreen(Screens):
                             game.rpc.close()
 
                     opens = {
-                        "general": self.open_general_settings,
+                        "general": self.open_general_tools,
                         "language": self.open_lang_settings
                     }
 
                     scroll_pos = None
-                    if "container_general" in self.checkboxes_text and \
-                            self.checkboxes_text["container_general"].vert_scroll_bar:
-                        scroll_pos = self.checkboxes_text["container_general"].vert_scroll_bar.start_percentage
+                    if "container_general" in self.text_objects and \
+                            self.text_objects["container_general"].vert_scroll_bar:
+                        scroll_pos = self.text_objects["container_general"].vert_scroll_bar.start_percentage
 
                     if self.sub_menu in opens:
                         opens[self.sub_menu]()
 
                     if scroll_pos is not None:
-                        self.checkboxes_text["container_general"].vert_scroll_bar.set_scroll_from_start_percentage(
+                        self.text_objects["container_general"].vert_scroll_bar.set_scroll_from_start_percentage(
                             scroll_pos)
 
                     break
@@ -179,26 +180,28 @@ class SettingsScreen(Screens):
         """
         self.settings_changed = False
 
-        self.general_settings_button = UIImageButton(
+        self.info_button = UIImageButton(
             scale(pygame.Rect((350, 200), (300, 60))),
-            "",
-            object_id="#general_settings_button",
-            manager=MANAGER)
-        self.info_button = UIImageButton(scale(
-            pygame.Rect((650, 200), (300, 60))),
             "",
             object_id="#info_settings_button",
             manager=MANAGER)
-        self.language_button = UIImageButton(scale(
+        self.kit_traits = UIImageButton(scale(
+            pygame.Rect((650, 200), (300, 60))),
+            "",
+            object_id="#kit_traits_button",
+            manager=MANAGER)
+        self.normal_traits = UIImageButton(scale(
             pygame.Rect((950, 200), (300, 60))),
             "",
-            object_id="#lang_settings_button",
+            object_id="#kit_traits_button",
             manager=MANAGER)
+        
         self.save_settings_button = UIImageButton(
             scale(pygame.Rect((654, 1100), (292, 60))),
             "",
             object_id="#save_settings_button",
             manager=MANAGER)
+
 
         if game.settings['fullscreen']:
             self.fullscreen_toggle = UIImageButton(
@@ -231,18 +234,18 @@ class SettingsScreen(Screens):
         if get_version_info().is_sandboxed:
             self.open_data_directory_button.hide()
 
-        self.update_save_button()
+#         self.update_save_button()
         self.main_menu_button = UIImageButton(scale(
             pygame.Rect((50, 50), (305, 60))),
             "",
             object_id="#main_menu_button",
             manager=MANAGER)
-        self.sub_menu = 'general'
-        self.open_general_settings()
+        self.sub_menu = 'info'
+        self.open_info_screen()
 
-        self.settings_at_open = game.settings.copy()
+#         self.settings_at_open = game.settings.copy()
 
-        self.refresh_checkboxes()
+#         self.refresh_checkboxes()
 
     def update_save_button(self):
         """
@@ -258,14 +261,14 @@ class SettingsScreen(Screens):
         TODO: DOCS
         """
         self.clear_sub_settings_buttons_and_text()
-        self.general_settings_button.kill()
-        del self.general_settings_button
         self.info_button.kill()
         del self.info_button
-        self.language_button.kill()
-        del self.language_button
-        self.save_settings_button.kill()
-        del self.save_settings_button
+#         self.save_settings_button.kill()
+#         del self.save_settings_button
+        self.normal_traits.kill()
+        del self.normal_traits
+        self.kit_traits.kill()
+        del self.kit_traits
         self.main_menu_button.kill()
         del self.main_menu_button
         self.fullscreen_toggle.kill()
@@ -273,51 +276,50 @@ class SettingsScreen(Screens):
         self.open_data_directory_button.kill()
         del self.open_data_directory_button
 
-        game.settings = self.settings_at_open
+#         game.settings = self.settings_at_open
 
     def save_settings(self):
         """Saves the settings, ensuring that they will be retained when the screen changes."""
         self.settings_at_open = game.settings.copy()
 
-    def open_general_settings(self):
+    def open_general_tools(self):
         """Opens and draws general_settings"""
         self.enable_all_menu_buttons()
         self.general_settings_button.disable()
         self.clear_sub_settings_buttons_and_text()
         self.sub_menu = 'general'
-        self.save_settings_button.show()
 
-        self.checkboxes_text[
+        self.text_objects[
             "container_general"] = pygame_gui.elements.UIScrollingContainer(
             scale(pygame.Rect((0, 440), (1400, 600))), manager=MANAGER)
 
-        n = 0
-        for code, desc in settings_dict['general'].items():
-            self.checkboxes_text[code] = pygame_gui.elements.UITextBox(
-                desc[0],
-                scale(pygame.Rect((450, n * 78), (1000, 78))),
-                container=self.checkboxes_text["container_general"],
-                object_id=get_text_box_theme("#text_box_30_horizleft_pad_0_8"),
-                manager=MANAGER)
-            self.checkboxes_text[code].disable()
-            n += 1
-
-        self.checkboxes_text[
-            "container_general"].set_scrollable_area_dimensions(
-            (1360 / 1600 * screen_x, (n * 78 + 80) / 1400 * screen_y))
-
-        self.checkboxes_text['instr'] = pygame_gui.elements.UITextBox(
-            """Change the general settings of your game here.\n"""
-            """More settings are available in the settings page of your Clan.""",
-            scale(pygame.Rect((200, 320), (1200, 200))),
-            object_id=get_text_box_theme("#text_box_30_horizcenter"),
-            manager=MANAGER)
+#         n = 0
+#         for code, desc in settings_dict['general'].items():
+#             self.checkboxes_text[code] = pygame_gui.elements.UITextBox(
+#                 desc[0],
+#                 scale(pygame.Rect((450, n * 78), (1000, 78))),
+#                 container=self.checkboxes_text["container_general"],
+#                 object_id=get_text_box_theme("#text_box_30_horizleft_pad_0_8"),
+#                 manager=MANAGER)
+#             self.checkboxes_text[code].disable()
+#             n += 1
+# 
+#         self.checkboxes_text[
+#             "container_general"].set_scrollable_area_dimensions(
+#             (1360 / 1600 * screen_x, (n * 78 + 80) / 1400 * screen_y))
+# 
+#         self.checkboxes_text['instr'] = pygame_gui.elements.UITextBox(
+#             """Change the general settings of your game here.\n"""
+#             """More settings are available in the settings page of your Clan.""",
+#             scale(pygame.Rect((200, 320), (1200, 200))),
+#             object_id=get_text_box_theme("#text_box_30_horizcenter"),
+#             manager=MANAGER)
 
         # This is where the actual checkboxes are created. I don't like
         #   how this is separated from the text boxes, but I've spent too much time to rewrite it.
         #   It has to separated because the checkboxes must be updated when settings are changed.
         #   Fix if you want. - keyraven
-        self.refresh_checkboxes()
+#         self.refresh_checkboxes()
         #TODO: check into this
 
 
@@ -329,45 +331,67 @@ class SettingsScreen(Screens):
         self.sub_menu = 'info'
         self.save_settings_button.hide()
 
-        self.checkboxes_text["info_container"] = pygame_gui.elements.UIScrollingContainer(
+        #TODO: fn to write info screen text
+        self.info_text += ''
+        
+        normal_trait_text = '<br><b><u>Normal (non-kit) Traits:</b></u><br>'
+        normal_trait_text += '<br>'.join(self.get_normal_traits())
+        kit_trait_text = '<br><b><u>Kit Traits:</u></b><br>'
+        kit_trait_text += '<br>'.join(self.get_kit_traits())
+        
+
+        self.text_objects["raw_text_container"] = pygame_gui.elements.UIScrollingContainer(
             scale(pygame.Rect((200, 300), (1200, 1000))),
             manager=MANAGER
         )
 
-        self.checkboxes_text['info_text_box'] = pygame_gui.elements.UITextBox(
-            self.info_text,
-            scale(pygame.Rect((0, 0), (1150, 8000))),
+        self.text_objects['normal_traits'] = pygame_gui.elements.UITextBox(
+            normal_trait_text,
+            scale(pygame.Rect((0, 0), (750, 8000))),
             object_id=get_text_box_theme("#text_box_30_horizcenter"),
-            container=self.checkboxes_text["info_container"],
+            container=self.text_objects["raw_text_container"],
+            manager=MANAGER)
+        self.text_objects['kit_traits'] = pygame_gui.elements.UITextBox(
+            kit_trait_text,
+            scale(pygame.Rect((0, 0), (1500, 8000))),
+            object_id=get_text_box_theme("#text_box_30_horizcenter"),
+            container=self.text_objects["raw_text_container"],
             manager=MANAGER)
 
-        self.checkboxes_text['info_text_box'].disable()
+#         self.text_objects['info_text_box'].disable()
 
         i = 0
         y_pos = 731
-        for tooltip in self.tooltip_text:
-            if not tooltip:
-                self.tooltip[f'tip{i}'] = UIImageButton(
-                    scale(pygame.Rect((400, i * 56 + y_pos), (400, 56))),
-                    "",
-                    object_id="#blank_button",
-                    container=self.checkboxes_text["info_container"],
-                    manager=MANAGER,
-                    starting_height=2
-                ),
-            else:
-                self.tooltip[f'tip{i}'] = UIImageButton(
-                    scale(pygame.Rect((400, i * 56 + y_pos), (400, 56))),
-                    "",
-                    object_id="#blank_button",
-                    container=self.checkboxes_text["info_container"],
-                    manager=MANAGER,
-                    tool_tip_text=tooltip,
-                    starting_height=2
-                ),
-
-            i += 1
-        self.checkboxes_text["info_container"].set_scrollable_area_dimensions(
+#         for tooltip in self.tooltip_text:
+#             if not tooltip:
+#                 self.tooltip[f'tip{i}'] = UIImageButton(
+#                     scale(pygame.Rect((400, i * 56 + y_pos), (400, 56))),
+#                     "",
+#                     object_id="#blank_button",
+#                     container=self.text_objects["info_container"],
+#                     manager=MANAGER,
+#                     starting_height=2
+#                 ),
+#             else:
+#                 self.tooltip[f'tip{i}'] = UIImageButton(
+#                     scale(pygame.Rect((400, i * 56 + y_pos), (400, 56))),
+#                     "",
+#                     object_id="#blank_button",
+#                     container=self.text_objects["info_container"],
+#                     manager=MANAGER,
+#                     tool_tip_text=tooltip,
+#                     starting_height=2
+#                 ),
+#
+        num_norm_traits = len(self.get_normal_traits())
+#         self.text_objects['normal_traits'].set_scrollable_area_dimensions(
+#             (1150 / 1600 * screen_x, (num_norm_traits * 56 + y_pos + 550) / 1400 * screen_y))
+        num_kit_traits = len(self.get_kit_traits())
+#         self.text_objects['kit_traits'].set_scrollable_area_dimensions(
+#             (1150 / 1600 * screen_x, (num_kit_traits * 56 + y_pos + 550) / 1400 * screen_y))
+        
+        i = max(num_norm_traits, num_kit_traits)
+        self.text_objects["raw_text_container"].set_scrollable_area_dimensions(
             (1150 / 1600 * screen_x, (i * 56 + y_pos + 550) / 1400 * screen_y))
 
     def open_lang_settings(self):
@@ -378,7 +402,7 @@ class SettingsScreen(Screens):
         self.sub_menu = 'language'
         self.save_settings_button.show()
 
-        self.checkboxes_text['instr'] = pygame_gui.elements.UITextBox(
+        self.text_objects['instr'] = pygame_gui.elements.UITextBox(
             "Change the language of the game here. This has not been implemented yet.",
             scale(pygame.Rect((200, 320), (1200, 100))),
             object_id=get_text_box_theme("#text_box_30_horizcenter"),
@@ -431,7 +455,7 @@ class SettingsScreen(Screens):
                     scale(pygame.Rect((340, n * 78), (68, 68))),
                     "",
                     object_id=box_type,
-                    container=self.checkboxes_text["container_" +
+                    container=self.text_objects["container_" +
                                                    self.sub_menu],
                     tool_tip_text=desc[1])
                 n += 1
@@ -440,23 +464,26 @@ class SettingsScreen(Screens):
         """
         TODO: DOCS
         """
-        for checkbox in self.checkboxes.values():
-            checkbox.kill()
-        self.checkboxes = {}
-        for text in self.checkboxes_text.values():
+#         for checkbox in self.checkboxes.values():
+#             checkbox.kill()
+#         self.checkboxes = {}
+        for text in self.text_objects.values():
             text.kill()
-        self.checkboxes_text = {}
+        self.text_objects = {}
 
     def enable_all_menu_buttons(self):
         """
         TODO: DOCS
         """
-        self.general_settings_button.enable()
+#         self.general_settings_button.enable()
         self.info_button.enable()
-        self.language_button.enable()
+        self.kit_traits.enable()
+        self.normal_traits.enable()
 
     def on_use(self):
         """
         TODO: DOCS
         """
+
+
 
