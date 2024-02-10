@@ -281,17 +281,23 @@ class EditTraitsScreen(Screens):
     def save_settings(self):
         """Saves the settings, ensuring that they will be retained when the screen changes."""
         self.settings_at_open = game.settings.copy()
+        
+    def open_kit_traits(self):
+        return
+    
+    def open_normal_traits(self):
+        return
 
-    def open_general_tools(self):
-        """Opens and draws general_settings"""
-        self.enable_all_menu_buttons()
-        self.general_settings_button.disable()
-        self.clear_sub_settings_buttons_and_text()
-        self.sub_menu = 'general'
-
-        self.text_objects[
-            "container_general"] = pygame_gui.elements.UIScrollingContainer(
-            scale(pygame.Rect((0, 440), (1400, 600))), manager=MANAGER)
+#     def open_general_tools(self):
+#         """Opens and draws general_settings"""
+#         self.enable_all_menu_buttons()
+#         self.general_settings_button.disable()
+#         self.clear_sub_settings_buttons_and_text()
+#         self.sub_menu = 'general'
+# 
+#         self.text_objects[
+#             "container_general"] = pygame_gui.elements.UIScrollingContainer(
+#             scale(pygame.Rect((0, 440), (1400, 600))), manager=MANAGER)
 
 #         n = 0
 #         for code, desc in settings_dict['general'].items():
