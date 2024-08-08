@@ -17,8 +17,13 @@ from scripts.conditions import Illness, Injury, PermanentCondition, get_amount_c
     medical_cats_condition_fulfilled
 import bisect
 
-from scripts.utility import get_med_cats, get_personality_compatibility, event_text_adjust, update_sprite, \
-    leader_ceremony_text_adjust
+from scripts.utility import (
+    get_alive_status_cats,
+    get_personality_compatibility,
+    event_text_adjust,
+    update_sprite,
+    leader_ceremony_text_adjust,
+)
 from scripts.game_structure.game_essentials import game, screen
 from scripts.cat_relations.relationship import Relationship
 from scripts.game_structure import image_cache
@@ -256,7 +261,7 @@ class Personality():
         self.aggression += randint(-max, max)
         self.sociability += randint(-max, max)
         
-     def mentor_influence(self, mentor: Cat):
+    def mentor_influence(self, mentor: Cat):
         """applies mentor influence after the pair go on a patrol together
         returns history information in the form (mentor_id, facet_affected, amount_affected)
         """
