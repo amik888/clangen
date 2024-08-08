@@ -256,22 +256,34 @@ class Personality():
         self.aggression += randint(-max, max)
         self.sociability += randint(-max, max)
         
-    def mentor_influence(self, mentor:Cat):
-        """applies mentor influence after the pair go on a patrol together 
-            returns history information in the form (mentor_id, facet_affected, amount_affected)"""
+     def mentor_influence(self, mentor: Cat):
+        """applies mentor influence after the pair go on a patrol together
+        returns history information in the form (mentor_id, facet_affected, amount_affected)
+        """
         mentor_personality = mentor.personality
-        
-        #Get possible facet values
-        possible_facets = {i: mentor_personality[i] - self[i] for i in 
-                           Personality.facet_types if mentor_personality[i] - self[i] != 0}
-        
+
+        # Get possible facet values
+        possible_facets = {
+            i: mentor_personality[i] - self[i]
+            for i in Personality.facet_types
+            if mentor_personality[i] - self[i] != 0
+        }
+
         if possible_facets:
             # Choice trait to effect, weighted by the abs of the difference (higher difference = more likely to effect)
-            facet_affected = choices([i for i in possible_facets], weights=[abs(i) for i in possible_facets.values()], k=1)[0]
-            # stupid python with no sign() function by default. 
-            amount_affected = int(possible_facets[facet_affected]/abs(possible_facets[facet_affected]) * randint(1, 2))
+            facet_affected = choices(
+                [i for i in possible_facets],
+                weights=[abs(i) for i in possible_facets.values()],
+                k=1,
+            )[0]
+            # stupid python with no sign() function by default.
+            amount_affected = int(
+                possible_facets[facet_affected]
+                / abs(possible_facets[facet_affected])
+                * randint(1, 2)
+            )
             self[facet_affected] += amount_affected
-            return (mentor.ID, facet_affected, amount_affected)
+            return mentor.ID, facet_affected, amount_affected
         else:
-            #This will only trigger if they have the same personality. 
+            # This will only trigger if they have the same personality.
             return None
